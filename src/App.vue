@@ -34,10 +34,11 @@
                   default body
                 </slot>
               </div>
-
+               <hr/>
+               <br>
               <div class="modal-footer">
                 <slot name="footer">
-                  default footer
+                  <br>
                   <button class="modal-default-button" @click="$emit('close')">
                     OK
                   </button>
@@ -61,22 +62,42 @@
 
               <div class="modal-header">
                 <slot name="header">
-                  default header
+                <h1>Sign Up</h1>
                 </slot>
               </div>
 
               <div class="modal-body">
                 <slot name="body">
-                  default body
+                  <form class="modal-content" action="/action_page.php">
+                    <p>Please fill in this form to create an account.</p>
+                    <hr>
+                    <label for="email"><b>Email</b></label>
+                    <input type="text" placeholder="Enter Email" name="email" required>
+
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" required>
+
+                    <label for="psw-repeat"><b>Repeat Password</b></label>
+                    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+
+                    <label>
+                      <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+                    </label>
+
+                    <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+                </form>
                 </slot>
               </div>
-
+              <hr/>
+              <br>
               <div class="modal-footer">
                 <slot name="footer">
                   default footer
                   <button class="modal-default-button" @click="$emit('close')">
-                    OK
+                    Ok
                   </button>
+                  <button class="modal-default-button" type="button" @click="$emit('close') class="cancelbtn">Cancel</button>
+                      <button  class="modal-default-button"type="submit" class="signup">Sign Up</button>
                 </slot>
               </div>
             </div>
@@ -201,7 +222,7 @@ button:hover {
 
 .modal-header h3 {
   margin-top: 0;
-  color: #42b983;
+  color: orange;
 }
 
 .modal-body {
@@ -209,7 +230,15 @@ button:hover {
 }
 
 .modal-default-button {
-  float: right;
+  height: 100%;
+	padding:6px 0 6px 0;
+	font:bold 13px Arial;
+	background:orange;
+	color:#fff;
+	border-radius:0px;
+	width:100px;
+	border:none;
+
 }
 
 /*
