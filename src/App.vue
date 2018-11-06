@@ -96,8 +96,8 @@
                   <button class="modal-default-button" @click="$emit('close')">
                     Ok
                   </button>
-                  <button class="modal-default-button" type="button" @click="$emit('close') class="cancelbtn">Cancel</button>
-                      <button  class="modal-default-button"type="submit" class="signup">Sign Up</button>
+                  <button class="modal-default-button" type="button" @click="$emit('close')" class="cancelbtn" >Cancel</button>
+                      <button  class="modal-default-button" type="submit" class="signup">Sign Up</button>
                 </slot>
               </div>
             </div>
