@@ -4,7 +4,7 @@
   <li><a href="default.asp">AFRICAN-FOOD</a></li>
   <li><a href="news.asp"> Top Menu </a></li>
   <li><a href="contact.asp"> Contact Us</a></li>
-  <li v-on:click="changeShowModalSignIn"  style="float:right"><a v-on:click="changeShowModal" class="active" >Sign in</a></li>
+  <li v-on:click="changeShowModalSignIn"  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" >Sign in</a></li>
   <li v-on:click="changeShowModalSignUp" style="float:right"><a  v-on:click="changeShowModalSignUp" >Sign up</a></li>
   <li id="barRecherche" style="float:right">
     <form>

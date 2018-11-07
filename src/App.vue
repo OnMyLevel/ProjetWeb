@@ -1,6 +1,6 @@
 <template>
  <div> 
-     <app-header v-bind:title="title" v-on:changeShowModalSignIn="updateShowModalSignIn($event)" v-on:changeTitle="updateTitle($event)"  
+     <app-header  v-on:changeShowModalSignIn="updateShowModalSignIn($event)" v-on:changeTitle="updateTitle($event)"  
      v-on:changeShowModalSignUp="updateShowModalSignUp($event)" ></app-header>
      <hr/>
      <component v-bind:menus="menus" v-bind:is="component"> </component>
@@ -24,14 +24,17 @@
             <div class="modal-container">
 
               <div class="modal-header">
-                <slot name="header">
-                  default header
-                </slot>
+                   Please fill in this form to connect on your account
               </div>
-
+               <hr/>
               <div class="modal-body">
                 <slot name="body">
-                  default body
+                  <form id="form">
+                        <input type="text"  placeholder="Username">
+                        <br>
+                        <input type="text"  placeholder="Password">
+                        <br>
+                   </form>
                 </slot>
               </div>
                <hr/>
@@ -39,9 +42,8 @@
               <div class="modal-footer">
                 <slot name="footer">
                   <br>
-                  <button class="modal-default-button" @click="$emit('close')">
-                    OK
-                  </button>
+                  <button class="modal-default-button" @click="$emit('close')">Cancel</button>
+                  <button  class="modal-default-button" type="submit" >Sign in</button>
                 </slot>
               </div>
             </div>
@@ -61,43 +63,30 @@
             <div class="modal-container">
 
               <div class="modal-header">
-                <slot name="header">
-                <h1>Sign Up</h1>
-                </slot>
+                Please fill in this form to create an account
               </div>
-
+                <hr/>
               <div class="modal-body">
                 <slot name="body">
-                  <form class="modal-content" action="/action_page.php">
-                    <p>Please fill in this form to create an account.</p>
-                    <hr>
-                    <label for="email"><b>Email</b></label>
-                    <input type="text" placeholder="Enter Email" name="email" required>
-
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" required>
-
-                    <label for="psw-repeat"><b>Repeat Password</b></label>
-                    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-
-                    <label>
-                      <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-                    </label>
-
-                    <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-                </form>
+                   <!-- Using vuefire (the official Firebase binding) -->
+                      <form id="form" >
+                        <input type="text" placeholder="Name">
+                        <br>
+                        <input type="text" placeholder="Username">
+                        <br>
+                        <input type="text" placeholder="Password">
+                        <br>
+                        <input type="email"  placeholder="email@email.com">
+                        <br>
+                      </form>
                 </slot>
               </div>
-              <hr/>
               <br>
+               <hr/>
               <div class="modal-footer">
                 <slot name="footer">
-                  default footer
-                  <button class="modal-default-button" @click="$emit('close')">
-                    Ok
-                  </button>
-                  <button class="modal-default-button" type="button" @click="$emit('close')" class="cancelbtn" >Cancel</button>
-                      <button  class="modal-default-button" type="submit" class="signup">Sign Up</button>
+                  <button class="modal-default-button" @click="$emit('close')">Cancel</button>
+                  <button  class="modal-default-button" type="submit">Sign Up</button>
                 </slot>
               </div>
             </div>
@@ -147,21 +136,50 @@ export default {
       formDisplay:true,
       showModalSignIn: false,
       showModalSignUp: false,
+      newUser: {
+           name: 'meril',
+           email: 'meril@gmail.com'
+      }
+    }
+  },
+  // computed property for form validation state
+  computed: {
+    validation: function () {
+      return {
+        name: !!this.newUser.name.trim(),
+        email: emailRE.test(this.newUser.email)
+      }
+    },
+    isValid: function () {
+      var validation = this.validation
+      return Object.keys(validation).every(function (key) {
+        return validation[key]
+      })
     }
   },
   methods:{
-    updateTitle:function(updateTitle){
-      console.log("upddateTitle:function(updateTitle)");
-      this.title = updateTitle;
-    },
-    updateShowModalSignIn:function(){
-      this.showModalSignIn= true;
-      console.log("ICI this.showModalSignIn "+this.showModalSignIn)
-    },
-    updateShowModalSignUp:function(){
-      this.showModalSignUp= true;
-      console.log("ICI"+this.showModalSignUp)
-    }
+      updateTitle:function(updateTitle){
+        console.log("upddateTitle:function(updateTitle)");
+        this.title = updateTitle;
+      },
+      updateShowModalSignIn:function(){
+        this.showModalSignIn= true;
+        console.log("ICI this.showModalSignIn "+this.showModalSignIn);
+      },
+      updateShowModalSignUp:function(){
+        this.showModalSignUp= true;
+        console.log("ICI"+this.showModalSignUp);
+      },
+      addUser: function () {
+        if (this.isValid) {
+          usersRef.push(this.newUser)
+          this.newUser.name = '';
+          this.newUser.email = '';
+        }
+      },
+      /*removeUser: function (user) {
+        usersRef.child(user['.key']).remove()
+      }*/
   }
 }
 </script>
@@ -238,7 +256,31 @@ button:hover {
 	border-radius:0px;
 	width:100px;
 	border:none;
+}
 
+.modal-body input[type=text], input[type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.modal-body input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal-body input[type=submit]:hover {
+    background-color: #45a049;
 }
 
 /*
@@ -263,5 +305,28 @@ button:hover {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+user {
+  height: 30px;
+  line-height: 30px;
+  padding: 10px;
+  border-top: 1px solid #eee;
+  overflow: hidden;
+  transition: all .25s ease;
+}
 
+.user:last-child {
+  border-bottom: 1px solid #eee;
+}
+
+.v-enter, .v-leave-active {
+  height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-top-width: 0;
+  border-bottom-width: 0;
+}
+
+.errors {
+  color: #f00;
+}
 </style>
