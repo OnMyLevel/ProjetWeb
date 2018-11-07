@@ -256,6 +256,7 @@ button:hover {
 	border-radius:0px;
 	width:100px;
 	border:none;
+  margin-left: 10%; 
 }
 
 .modal-body input[type=text], input[type=email] {

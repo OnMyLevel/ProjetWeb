@@ -2,7 +2,7 @@
 <div id="menus">
   <p>{{title}} </p>
   <ul >
-    <li v-for="menu in menus" v-on:click="menu.show = !menu.show">
+    <li v-for="menu in menus" :key="menu.id" v-on:click="menu.show = !menu.show">
       <h2>{{menu.name}}</h2>
       <h3 v-show="menu.show">{{menu.speciality}}</h3>
       <br>
@@ -12,7 +12,7 @@
    <button class="buttonForm" v-on:click="deleteMenu" >Ajouter un menus </button>
   <hr>
   <p id="listUser">
-    <span id="user" v-for="menu in menus" v-on:click="menu.show = !menu.show">
+    <span id="user" v-for="menu in menus" :key="menu.id" v-on:click="menu.show = !menu.show">
       <h2>{{menu.name}}</h2>
       <h3 v-show="menu.show">{{menu.speciality}}</h3>
       <br>
@@ -77,16 +77,15 @@ li{
     margin-left: 33%; 
 }
 .buttonForm{
-  height: 100%;
+  height: 110%;
 	padding:6px 0 6px 0;
 	font:bold 13px Arial;
 	background:black;
 	color:#fff;
 	border-radius:0px;
-	width:100px;
+	width:100%;
 	border:none;
 }
-
 
 ol {counter-reset: repas;} /* on initialise et nomme un compteur */
 #user{

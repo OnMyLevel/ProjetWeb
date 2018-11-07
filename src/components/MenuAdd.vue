@@ -2,7 +2,7 @@
 <div id="menus">
   <p>{{title}} </p>
   <ul>
-    <li v-for="menu in menus" v-on:click="menu.show = !menu.show">
+    <li v-for="menu in menus" :key="menu.id" v-on:click="menu.show = !menu.show">
         <h2>{{menu.name}}</h2>
         <h3 v-show="menu.show">{{menu.speciality}}</h3>
         <br>
