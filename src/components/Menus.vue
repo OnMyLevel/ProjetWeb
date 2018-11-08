@@ -8,9 +8,9 @@
           <button v-on:click="addComment = !addComment" id="btnAdd"> </button><button id="btnLike"> </button>
           <br>
           <hr>
-          <input v-show="addComment" id="addCommentInput" type="text"/> 
+          <input v-show="addComment" class="addCommentInput" type="text"/> 
           <br>
-          <button v-show="addComment" id="addCommentButton"> Ajouter </button>
+          <button v-show="addComment" class="addCommentButton"> Ajouter </button>
      </li>
   </ul>
 </div>
@@ -36,25 +36,6 @@ export default {
       this.menus.pop();
     }
   },
-  // lifecycle hooks
-  /*beforeCreat(){
-    alert('created');
-  },
-  created(){
-    alert('created');
-  },
-  beforeMount(){
-    alert('beforeMount')
-  },
-  mounted(){
-    alert('mounted');
-  },
-  beforeUpdate(){
-    alert('beforeUpdate');
-  },
-  updated(){
-    alert('updated');
-  }*/
 }
 </script>
 <style scoped>
@@ -132,7 +113,7 @@ button:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-#addCommentButton{
+.addCommentButton{
 
   padding:6px 0 6px 0;
 	font:bold 13px Arial;
@@ -144,7 +125,7 @@ button:hover {
 
 }
 
-#addCommentInput{
+.addCommentInput{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

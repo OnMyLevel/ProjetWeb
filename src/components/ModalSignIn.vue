@@ -64,18 +64,15 @@ export default {
   },
   methods:{
       updateTitle:function(updateTitle){
-        console.log("upddateTitle:function(updateTitle)");
         this.title = updateTitle;
       },
       updateShowModalSignIn:function(){
         this.showModalSignIn= true;
-        console.log("ICI this.showModalSignIn "+this.showModalSignIn);
       },
       updateShowModalSignUp:function(){
         this.showModalSignUp= true;
-        console.log("ICI"+this.showModalSignUp);
       },
-      addUser: function () {
+      connectUser: function () {
         if (this.isValid) {
           usersRef.push(this.newUser)
           this.newUser.name = '';

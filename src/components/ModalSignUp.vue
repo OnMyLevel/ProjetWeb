@@ -12,6 +12,13 @@
                 <slot name="body">
                    <!-- Using vuefire (the official Firebase binding) -->
                       <form id="form" >
+                        <div id="checkboxes">
+                          <label>Man </label>
+                          <input type="radio" value="Mr" v-model.lazy="newUser.gender" />
+                          <label>Woman </label>
+                          <input type="radio" value="Mrs" v-model.lazy="newUser.gender" />
+                        </div>
+                        <br>
                         <input type="text" placeholder="Name" v-model.lazy="newUser.name" required/>
                         <br>
                         <input type="text" placeholder="Username" v-model.lazy="newUser.userName" required/>
@@ -20,13 +27,6 @@
                         <br>
                         <input type="email"  placeholder="email@email.com" v-model.lazy="newUser.email" required/>
                         <br>
-                        <br>
-                        <div id="checkboxes">
-                          <label>Man </label>
-                          <input type="radio" value="Mr" v-model.lazy="newUser.gender" />
-                          <label>Woman </label>
-                          <input type="radio" value="Mrs" v-model.lazy="newUser.gender" />
-                        </div>
                         <br>
                         <label> User-type</label>
                         <select v-model="newUser.userType">
@@ -49,7 +49,7 @@
               <div class="modal-footer">
                 <slot name="footer">
                   <button class="modal-default-button" @click="$emit('close')">Cancel</button>
-                  <button  class="modal-default-button" type="submit">Sign Up</button>
+                  <button v-on:click.prevent="addUser" @click="$emit('close')" class="modal-default-button" type="submit">Sign Up</button>
                 </slot>
               </div>
             </div>
@@ -96,29 +96,30 @@ export default {
   },
   methods:{
       updateTitle:function(updateTitle){
-        console.log("upddateTitle:function(updateTitle)");
         this.title = updateTitle;
       },
       updateShowModalSignIn:function(){
         this.showModalSignIn= true;
-        console.log("ICI this.showModalSignIn "+this.showModalSignIn);
       },
       updateShowModalSignUp:function(){
         this.showModalSignUp= true;
-        console.log("ICI"+this.showModalSignUp);
       },
-      addUser: function () {
-        if (this.isValid) {
+      addUser:function () {
+        console.log("ICI");
+        this.$http.post('https://jsonplaceholder.typicode.com/posts',{
+          title: this.newUser.userType,
+          body:this.newUser.userName,
+          userId:1
+        }).then(function(data){
+           console.log(data);
+        });
+        /*if (this.isValid) {
           usersRef.push(this.newUser)
           this.newUser.name = '';
-          this.newUser.email = '';
+          this.newUser.email = '';*/
         }
       },
-      /*removeUser: function (user) {
-        usersRef.child(user['.key']).remove()
-      }*/
   }
-}
 </script>
 <style scopped>
 hr{
@@ -212,15 +213,6 @@ button:hover {
 .modal-body input[type=submit]:hover {
     background-color: #45a049;
 }
-
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
 
 .modal-enter {
   opacity: 0;
