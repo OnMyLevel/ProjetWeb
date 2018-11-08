@@ -20,12 +20,26 @@
                         <br>
                         <input type="email"  placeholder="email@email.com" v-model.lazy="newUser.email" required/>
                         <br>
+                        <br>
+                        <div id="checkboxes">
+                          <label>Man </label>
+                          <input type="radio" value="Mr" v-model.lazy="newUser.gender" />
+                          <label>Woman </label>
+                          <input type="radio" value="Mrs" v-model.lazy="newUser.gender" />
+                        </div>
+                        <br>
+                        <label> User-type</label>
+                        <select v-model="newUser.userType">
+                            <option v-for="userType in userTypes" :key="userType.id" > {{userType}}</option> 
+                        </select>
+                        <br>
                       </form>
                       <br>
                       <hr/>
                       <div id="preview">
                         <h4>Your new account :</h4>
-                        <p>{{newUser.name}}</p>
+                        <p> {{ newUser.userType}}</p>
+                        <p>{{newUser.gender}} {{newUser.name}}</p>
                         <p>{{newUser.userName}}</p>
                         <p>{{newUser.email}}</p>
                       </div>
@@ -53,11 +67,16 @@ export default {
   data(){
     return {
       newUser:{
+        userType:"",
         name: "",
         userName:"",
+        gender:"",
         password:"",
         email: ""
-      }
+      },
+      userTypes:['Admin',
+        'Public',
+      ]
     }
   },
   // computed property for form validation state

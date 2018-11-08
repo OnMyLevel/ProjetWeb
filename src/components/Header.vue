@@ -9,8 +9,8 @@
   <li id="barRecherche" style="float:right">
     <form>
          <div>
-            <input type="search" id="maRecherche" name="q" placeholder="Rechercher sur le site…">
-            <button id="btnRecherche">Rechercher</button>
+            <input type="search" id="maRecherche" name="q" placeholder="Looking for …">
+            <button id="btnRecherche">Research</button>
         </div>
     </form>
 </li>

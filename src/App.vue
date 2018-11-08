@@ -15,52 +15,14 @@
      <hr/>
      <br>
      <app-footer></app-footer>
-
-    <!-- Modeal pour Sign in  
-    <script type="text/x-template" id="modal-template-signin">
-      <transition name="modal">
-        <div class="modal-mask">
-          <div class="modal-wrapper">
-            <div class="modal-container">
-              <div class="modal-header">
-                   Please fill in this form to connect on your account
-              </div>
-               <hr/>
-              <div class="modal-body">
-                <slot name="body">
-                  <form id="form">
-                        <input type="text"  placeholder="Username">
-                        <br>
-                        <input type="password"  placeholder="Password">
-                        <br>
-                   </form>
-                </slot>
-              </div>
-               <hr/>
-               <br>
-              <div class="modal-footer">
-                <slot name="footer">
-                  <br>
-                  <button class="modal-default-button" @click="$emit('close')">Cancel</button>
-                  <button  class="modal-default-button" type="submit" >Sign in</button>
-                </slot>
-              </div>
-            </div>
-          </div>
-        </div>
-      </transition>
-    </script>-->
-
       <modal-sign-in v-bind:newUser="newUser" v-if="showModalSignIn" @close="showModalSignIn = false">
         <h3 slot="header">custom header</h3>
       </modal-sign-in>
       <modal-sign-up v-if="showModalSignUp" @close="showModalSignUp = false">
         <h3 slot="header">custom header</h3>
       </modal-sign-up>
-
 </div>
 </template>
-
 <script>
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
@@ -107,6 +69,7 @@ export default {
       newUser:{
         name: "",
         userName:"",
+        gender:"",
         password:"",
         email: ""
       }
