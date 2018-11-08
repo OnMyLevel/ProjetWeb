@@ -1,7 +1,5 @@
 <template>
   <footer> 
-      <br>
-      <p> Page :{{ title }} 
       <br>  
       AfricanFood
       <br>

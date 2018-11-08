@@ -4,15 +4,15 @@
   <h3> Stay in touch and please fill out our form ... </h3>
   <form action="/ma-page-de-traitement" method="post">
     <div>
-        <label for="name">Nom :</label>
+        <label for="name">Your Name :</label>
         <input type="text" id="name" name="user_name">
     </div>
     <div>
-        <label for="mail">e-mail :</label>
-        <input type="email" id="mail" name="user_mail">
+        <label for="mail">Your e-mail :</label>
+        <input type="text" id="mail" name="user_mail">
     </div>
     <div>
-        <label for="msg">Message :</label>
+        <label for="msg">Your Message :</label>
         <textarea id="msg" name="user_message"></textarea>
     </div>
      <button class="buttonForm"> Send Email </button>
@@ -40,7 +40,7 @@ form {
   /* Uniquement centrer le formulaire sur la page */
   margin: 0 auto;
   width: 700px;
-  height: 450px;
+  height: 490px;
   /* Encadré pour voir les limites du formulaire */
   padding: 1em;
  /* border: 1px solid #CCC;*/

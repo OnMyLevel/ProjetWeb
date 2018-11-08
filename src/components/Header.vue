@@ -16,7 +16,6 @@
 </li>
 </ul>
  <app-banner> </app-banner>
-<p id="titlePage" v-on:click="changeTitle" > Page : {{title}} </p>
 </header>
 </template>
 <script>
