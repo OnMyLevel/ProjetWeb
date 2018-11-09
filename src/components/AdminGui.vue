@@ -1,6 +1,6 @@
 <template>
 <div id="menus">
-  <p>{{title}} </p>
+  <p v-rainbow >{{title}} </p>
   <ul >
     <li v-for="menu in menus" :key="menu.id" v-on:click="menu.show = !menu.show">
       <h2>{{menu.name}}</h2>
@@ -11,10 +11,14 @@
   </ul>
    <button class="buttonForm" v-on:click="deleteMenu" >Ajouter un menus </button>
   <hr>
+  <!-- Search form -->
+    <div>
+      <input class="active" type="text"  v-model="search" placeholder="Search" />
+    </div>
   <p id="listUser">
-    <span id="user" v-for="menu in menus" :key="menu.id" v-on:click="menu.show = !menu.show">
-      <h2>{{menu.name}}</h2>
-      <h3 v-show="menu.show">{{menu.speciality}}</h3>
+    <span id="user" v-for="user in  listUsers" :key="user.id" v-on:click="user.show = !user.show">
+      <h2 v-rainbow >{{user.name | to-uppercase }}</h2>
+      <h3 v-show="user.show">{{user.email}}</h3>
       <br>
        <button id="btnRemoveUser"> </button>
     </span>
@@ -29,12 +33,25 @@ export default {
       menus:{
         type: Array,
         required: true
+      },
+      listUsers:{
+        type: Array,
+        required: true
+      },
+      user:{
+        required: true
+      },
+      filteredlistUser:{
+        type: Array,
+        required: true
       }
+
     },
   name: 'app',
   data () {
     return {
        title:'GUI for the ADMIN ',
+       search:''
     }
   },
   methods:{
@@ -145,5 +162,19 @@ span h2:hover{
 
 button:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.active{
+  border: 1px solid black;
+    box-shadow: 0 0 0 1px black;
 }
 </style>

@@ -24,7 +24,7 @@
                 <slot name="footer">
                   <br>
                   <button class="modal-default-button" @click="$emit('close')">Cancel</button>
-                  <button  class="modal-default-button" type="submit" >Sign in</button>
+                  <button  class="modal-default-button" type="submit" @click="$emit('close')" >Sign in</button>
                 </slot>
               </div>
             </div>

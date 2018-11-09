@@ -1,6 +1,5 @@
 <template>
 <div id="formHelper">
-  <br>
   <h3> Stay in touch and please fill out our form ... </h3>
   <form action="/ma-page-de-traitement" method="post">
     <div>
@@ -16,7 +15,6 @@
         <textarea id="msg" name="user_message"></textarea>
     </div>
      <button class="buttonForm"> Send Email </button>
-     <br>
      <br>
 </form>
   <slot> </slot>
@@ -48,7 +46,7 @@ form {
 }
 
 form div + div {
-  margin-top: 1em;
+  margin-top: 0.1em;
 }
 
 label {

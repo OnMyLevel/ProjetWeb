@@ -75,7 +75,7 @@ export default {
         email: ""
       },
       userTypes:['Admin',
-        'Public',
+        'User',
       ]
     }
   },
@@ -106,11 +106,7 @@ export default {
       },
       addUser:function () {
         console.log("ICI");
-        this.$http.post('https://jsonplaceholder.typicode.com/posts',{
-          title: this.newUser.userType,
-          body:this.newUser.userName,
-          userId:1
-        }).then(function(data){
+        this.$http.post('https://jsonplaceholder.typicode.com/posts',this.newUser).then(function(data){
            console.log(data);
         });
         /*if (this.isValid) {

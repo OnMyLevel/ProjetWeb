@@ -2,7 +2,7 @@
 <div id="menus">
   <p>{{title}} </p>
   <ul>
-    <li v-for="menu in menus" :key="menu.id" v-on:click="menu.show = !menu.show">
+    <li v-for="menu in filteredMenus" :key="menu.id" v-on:click="menu.show = !menu.show">
         <h2>{{menu.name}}</h2>
         <h3 v-show="menu.show">{{menu.speciality}}</h3>
           <button v-on:click="addComment = !addComment" id="btnAdd"> </button><button id="btnLike"> </button>
@@ -23,7 +23,11 @@ export default {
         type: Array,
         required: true
       },
-      addComment: true
+      addComment: true,
+     filteredMenus:{
+        type: Array,
+        required: true
+      }
     },
   name: 'app',
   data () {

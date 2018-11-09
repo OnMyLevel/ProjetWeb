@@ -3,7 +3,11 @@
      <app-header  v-on:changeShowModalSignIn="updateShowModalSignIn($event)" v-on:changeTitle="updateTitle($event)"  
      v-on:changeShowModalSignUp="updateShowModalSignUp($event)" ></app-header>
      <hr/>
-     <component v-bind:menus="menus" v-bind:is="component"> </component>
+        <!-- Search form -->
+        <div>
+          <input class="active" type="text"  v-model="search" placeholder="Search" />
+        </div>
+     <component v-bind:menus="menus" v-bind:filteredMenus="filteredMenus" v-bind:listUsers="listUsers" v-bind:user="user" v-bind:is="component"> </component>
      <div id="buttonGroup">
         <button class="buttonForm"  v-on:click="component='app-menus-public'; formDisplay = true;"> Gui Public </button>
         <button class="buttonForm" v-on:click="component='app-menus-user'; formDisplay = false;"> Gui User </button>
@@ -57,6 +61,7 @@ export default {
            {name:'Kami', speciality:'Webpack', show:false},
            {name:'Yoshi', speciality:'Data Design', show:false}
         ],
+      listUsers:[],
       title:'Menus',
       component:'app-menus-public',
       formDisplay:true,
@@ -72,36 +77,19 @@ export default {
         gender:"",
         password:"",
         email: ""
-      }
-    }
-  },
-  // computed property for form validation state
-  computed: {
-    validation: function () {
-      return {
-        name: !!this.newUser.name.trim(),
-        email: emailRE.test(this.newUser.email)
-      }
-    },
-    isValid: function () {
-      var validation = this.validation
-      return Object.keys(validation).every(function (key) {
-        return validation[key]
-      })
+      },
+      search:''
     }
   },
   methods:{
       updateTitle:function(updateTitle){
-        console.log("upddateTitle:function(updateTitle)");
-        this.title = updateTitle;
+        this.title =updateTitle;
       },
       updateShowModalSignIn:function(){
-        this.showModalSignIn= true;
-        console.log("ICI this.showModalSignIn "+this.showModalSignIn);
+        this.showModalSignIn=true;
       },
       updateShowModalSignUp:function(){
-        this.showModalSignUp= true;
-        console.log("ICI"+this.showModalSignUp);
+        this.showModalSignUp=true;
       },
       addUser: function () {
         if (this.isValid) {
@@ -110,10 +98,23 @@ export default {
           this.newUser.email = '';
         }
       },
-      /*removeUser: function (user) {
-        usersRef.child(user['.key']).remove()
-      }*/
-  }
+  },
+  created(){
+    this.$http.get('https://jsonplaceholder.typicode.com/users').then(function(data){
+      console.log(data);
+      this.listUsers = data.body.slice(0,6);
+    })
+  },
+  // computed property for form validation state
+  computed:{
+    filteredMenus: function(){
+      console.log("filter");
+      console.log(this.search);
+      return this.menus.filter((menu) => {
+        return menu.name.match(this.search);
+      });
+    }
+  },
 }
 </script>
 <style scopped>
@@ -141,5 +142,19 @@ hr{
 }
 button:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.active{
+  border: 1px solid black;
+    box-shadow: 0 0 0 1px black;
 }
 </style>

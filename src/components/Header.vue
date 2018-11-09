@@ -6,14 +6,6 @@
   <li><a href="#formHelper"> Contact Us</a></li>
   <li v-on:click="changeShowModalSignIn"  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" >Sign in</a></li>
   <li v-on:click="changeShowModalSignUp" style="float:right"><a  v-on:click="changeShowModalSignUp" >Sign up</a></li>
-  <li id="barRecherche" style="float:right">
-    <form>
-         <div>
-            <input type="search" id="maRecherche" name="q" placeholder="Looking for …">
-            <button id="btnRecherche">Research</button>
-        </div>
-    </form>
-</li>
 </ul>
  <app-banner> </app-banner>
 </header>
@@ -30,6 +22,9 @@ export default {
       title:{
           type:String
       },
+      search:{
+          type:String
+      }
   },
   data () {
     return {
@@ -42,11 +37,9 @@ export default {
         bus.$emit('titleChanged','CHANGE-BUS');
       },
       changeShowModalSignIn:function(){
-        console.log("CHANGEshowModalSignIn");
         this.$emit('changeShowModalSignIn',true);
       },
       changeShowModalSignUp:function(){
-        console.log("CHANGEshowModalSignUp");
         this.$emit('changeShowModalSignUp',true);
       }
   }
@@ -97,10 +90,11 @@ h1{
     margin-right: +1%;
 }
 #barRecherche{
-    height: 100%;
+    height: 14px;
     margin-top: 13px;
-    width: 140;
-
+    margin-left: 42px;
+    margin-right: 5px;
+    width: 60%;
 }
 #btnRecherche{
     height: 100%;
@@ -112,8 +106,11 @@ h1{
 	width:100px;
 	border:none;
     margin-right: 3px;
+    margin-left: 7px;
 }
 #maRecherche{
-  border-radius:0px;
+  float: left;
+  height: 100%;
+  width: 80%
 }
 </style>
