@@ -36,7 +36,6 @@ export default {
     }
   },
   created(){
-    
       this.$http.get('http://jsonplaceholder.typicode.com/posts/'+this.id).then(
       function(data){
           console.log(this.id);

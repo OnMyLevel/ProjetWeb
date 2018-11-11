@@ -104,9 +104,17 @@ export default {
       },
   },
   created(){
-    this.$http.get('https://jsonplaceholder.typicode.com/users').then(function(data){
+    this.$http.get('https://projetweb-9605d.firebaseio.com/user.json').then(function(data){
       console.log(data);
-      this.listUsers = data.body.slice(0,6);
+      return data.json();
+    }).then(function(data){
+      var usersArray =[];
+      for(let key in data){
+        data[key].id= key
+        usersArray.push(data[key])
+      }
+      console.log(data)
+      this.listUsers = usersArray;
     })
   },
   // computed property for form validation state
