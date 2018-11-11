@@ -4,7 +4,7 @@
   <ul>
     <li v-for="menu in filteredMenus" :key="menu.id" v-on:click="menu.show = !menu.show">
         <h2>{{menu.name}}</h2>
-        <h3 v-show="menu.show">{{menu.speciality}}</h3>
+       <router-link v-bind:to="'/menu/'+menu.id"> <h3 v-show="menu.show"> Voir le Menu </h3> </router-link>
           <button v-on:click="addComment = !addComment" id="btnAdd"> </button><button id="btnLike"> </button>
           <br>
           <hr>
@@ -100,6 +100,10 @@ li{
 #btnLike :hover{
    position: relative; 
     top: -5px;
+}
+router-link:hover{
+   background-color:tomato;
+   color: black;
 }
 
 #btnAdd :hover{

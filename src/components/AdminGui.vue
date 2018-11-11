@@ -1,6 +1,5 @@
 <template>
 <div id="menus">
-  <p v-rainbow >{{title}} </p>
   <ul >
     <li v-for="menu in menus" :key="menu.id" v-on:click="menu.show = !menu.show">
       <h2>{{menu.name}}</h2>
@@ -11,10 +10,6 @@
   </ul>
    <button class="buttonForm" v-on:click="deleteMenu" >Ajouter un menus </button>
   <hr>
-  <!-- Search form -->
-    <div>
-      <input class="active" type="text"  v-model="search" placeholder="Search" />
-    </div>
   <p id="listUser">
     <span id="user" v-for="user in  listUsers" :key="user.id" v-on:click="user.show = !user.show">
       <h2 v-rainbow >{{user.name | to-uppercase }}</h2>
@@ -155,7 +150,13 @@ ol {counter-reset: repas;} /* on initialise et nomme un compteur */
 li h2:hover{
   background-color:tomato;
 }
-
+p{
+  
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: O;
+}
 span h2:hover{
   background-color: greenyellow;
 }

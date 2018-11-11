@@ -22,7 +22,7 @@ export default {
     text-align: center;
 }
 h1{
-    padding-top: 25px;
+    padding-top: -40px;
     color:gold;
     text-shadow: black 0.1em 0.1em 0.1em ;
     font-size: 70px;

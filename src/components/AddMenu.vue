@@ -56,6 +56,7 @@
         </div>
       </transition>
 </template>
+
 <script>
 import '@fortawesome/fontawesome-free';
 
@@ -104,7 +105,7 @@ export default {
       },
       addUser:function () {
         console.log("ICI");
-        this.$http.post('https://projetweb-9605d.firebaseio.com/user.json',this.newUser).then(function(data){
+        this.$http.post('https://jsonplaceholder.typicode.com/posts',this.newUser).then(function(data){
            console.log(data);
         });
         /*if (this.isValid) {

@@ -1,9 +1,8 @@
 <template>
 <header>
 <ul>
-  <li><a href="#btnRecherche">AFRICAN-FOOD</a></li>
-  <li><a href="#menus"> Top Menu </a></li>
-  <li><a href="#formHelper"> Contact Us</a></li>
+  <li><router-link to="/">AFRICAN-FOOD </router-link></li>
+  <li><router-link to="/mention">Mention Légales</router-link></li>
   <li v-on:click="changeShowModalSignIn"  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" >Sign in</a></li>
   <li v-on:click="changeShowModalSignUp" style="float:right"><a  v-on:click="changeShowModalSignUp" >Sign up</a></li>
 </ul>

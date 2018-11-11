@@ -1,13 +1,20 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueResource from 'vue-resource'
+import VueRouteur from 'vue-router'
 import '@fortawesome/fontawesome-free';
+import VueRouter from 'vue-router';
+import Routes from './routers'
 
 export const bus = new Vue();
 
 Vue.use(VueResource);
+Vue.use(VueRouteur);
 
-
+const router = new VueRouter({
+  routes : Routes,
+  mode:'history'
+})
 // custom directives
 Vue.filter('to-uppercase',function(value){
   return value.toUpperCase();
@@ -38,6 +45,7 @@ Vue.directive('rainbow', {
 
 new Vue({
   el: '#app',
-  render: h => h(App)
+  render: h => h(App),
+  router: router
 })
 

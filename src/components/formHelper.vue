@@ -70,15 +70,23 @@ input, textarea {
   border: 1px solid #999;
 }
 
-input:focus, textarea:focus {
-  /* Pour souligner légèrement les éléments actifs */
-  border-color: #000;
+input[type=text] input[type=area] input[type=text] input[type=submit] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.active{
+  border: 1px solid black;
+  box-shadow: 0 0 0 1px black;
 }
 
 textarea {
   /* Pour aligner les champs texte multi‑ligne avec leur étiquette */
   vertical-align: top;
-
   /* Pour donner assez de place pour écrire du texte */
   height: 13em;
 }
