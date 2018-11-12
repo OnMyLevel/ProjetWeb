@@ -1,7 +1,5 @@
 <template>
  <div> 
-     <app-header  v-on:changeShowModalSignIn="updateShowModalSignIn($event)" v-on:changeTitle="updateTitle($event)"  
-     v-on:changeShowModalSignUp="updateShowModalSignUp($event)" ></app-header>
         <p> <h2>Nos mentions légales : </h2>
         Merci de lire attentivement les présentes modalités d'utilisation du présent site avant de le parcourir. En vous connectant sur ce site, vous acceptez sans réserve les présentes modalités.
         Editeur du site
@@ -132,20 +130,13 @@
         Un site Internet pour la Maison de la Traduction en Nouvelle Aquitaine
        </p> 
        <hr/>
-     <app-footer></app-footer>
 </div>
 </template>
 <script>
-import Header from './Header.vue';
-import Footer from './Footer.vue';
-import formHelper from './FormHelper.vue';
-
 
 export default {
   components:{
-      'app-header':Header,
-      'app-footer': Footer,
-      'app-form-helper': formHelper
+    
   },
   data(){
     return {

@@ -1,25 +1,18 @@
 <template>
  <div> 
-     <app-header  v-on:changeShowModalSignIn="updateShowModalSignIn($event)" v-on:changeTitle="updateTitle($event)"  
+     <!--<app-header  v-on:changeShowModalSignIn="updateShowModalSignIn($event)" v-on:changeTitle="updateTitle($event)"  
      v-on:changeShowModalSignUp="updateShowModalSignUp($event)" ></app-header>
-     <hr/>
+     <hr/>-->
         <!-- Search form -->
-        <div>
-          <input class="active" type="text"  v-model="search" placeholder="Search" />
-        </div>
+      <div>
+        <input class="active" type="text"  v-model="search" placeholder="Search" />
+      </div>
      <component v-bind:menus="menus" v-bind:filteredMenus="filteredMenus" v-bind:listUsers="listUsers" v-bind:user="user" v-bind:is="component"> </component>
-     <router-view></router-view>
-     <div id="buttonGroup">
-        <button class="buttonForm"  v-on:click="component='app-menus-public'; formDisplay = true;"> Gui Public </button>
-        <button class="buttonForm" v-on:click="component='app-menus-user'; formDisplay = false;"> Gui User </button>
-        <button class="buttonForm" v-on:click="component='app-admin-gui'; formDisplay = false;"> Gui Admin </button>
-     </div>
      <hr/>
-     <app-form-helper v-show="formDisplay" id="formulaire"></app-form-helper>
+     <!--<app-form-helper v-show="formDisplay" id="formulaire"></app-form-helper>-->
      <br>
-     <hr/>
+     <!--<hr/>-->
      <br>
-     <app-footer></app-footer>
       <modal-sign-in v-bind:newUser="newUser" v-bind:userFireBase="userFireBase" v-if="showModalSignIn" @close="showModalSignIn = false">
       </modal-sign-in>
       <modal-sign-up v-if="showModalSignUp" @close="showModalSignUp = false">

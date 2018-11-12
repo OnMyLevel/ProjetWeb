@@ -1,25 +1,134 @@
 <template>
  <div> 
-<router-view> </router-view>
+  <app-header  v-on:changeShowModalSignIn="updateShowModalSignIn($event)" v-on:changeTitle="updateTitle($event)"  
+     v-on:changeShowModalSignUp="updateShowModalSignUp($event)" ></app-header>
+     <hr/>
+    <router-view v-bind:menus="menus" v-bind:filteredMenus="filteredMenus" v-bind:listUsers="listUsers" v-bind:user="user"> </router-view>
+    <app-footer></app-footer>
+    <br>
+      <modal-sign-in v-bind:newUser="newUser" v-bind:userFireBase="userFireBase" v-if="showModalSignIn" @close="showModalSignIn = false">
+      </modal-sign-in>
+      <modal-sign-up v-if="showModalSignUp" @close="showModalSignUp = false">
+      </modal-sign-up>
+      <modal-add-menu v-if="showModalAddmenu" @close="showModalAddmenu = false">
+      </modal-add-menu>
 </div>
 </template>
 <script>
+import Header from './components/Header.vue';
+import Footer from './components/Footer.vue';
+import Menus from './components/Menus.vue';
+import Banner from './components/Banner.vue';
+import formHelper from './components/FormHelper.vue';
+import MenuAdd from './components/MenuAdd.vue';
+import AdminGui from './components/AdminGui.vue';
+import ModalSignUp from './components/ModalSignUp.vue';
+import ModalSignIn from './components/ModalSignIn.vue';
+import ModalAddMenu from './components/AddMenu.vue';
+import '@fortawesome/fontawesome-free';
+import {bus} from './main';
+import firebase from 'firebase';
 export default {
+
+  
   components:{
+    'app-header':Header,
+      'app-footer': Footer,
+      'app-menus-public': Menus,
+      'app-banner':Banner,
+      'app-form-helper': formHelper,
+      'app-menus-user': MenuAdd,
+      'app-admin-gui':AdminGui,
+      'modal-sign-up':ModalSignUp,
+      'modal-sign-in':ModalSignIn,
+      'modal-add-Menu':ModalAddMenu,
       
   },
   data(){
-    return {
+        return {
+      menus:[
+           {id:1,name:'Ryu', speciality:'Vue Components', show:false},
+           {id:2,name:'Crystal', speciality:'HTML Wizardy', show:false},
+           {id:3,name:'Hitoshi', speciality:'Click Events ', show:false},
+           {id:4,name:'Tango', speciality:'Conditionals', show:false},
+           {id:5,name:'Kami', speciality:'Webpack', show:false},
+           {id:6,name:'Yoshi', speciality:'Data Design', show:false}
+        ],
+      listUsers:[],
+      title:'Menus',
+      component:'app-menus-public',
+      formDisplay:true,
+      showModalSignIn: false,
+      showModalSignUp: false,
+      showModalAddmenu: false,
+      user: {
+           name: 'meril',
+           email: 'meril@gmail.com'
+      },
+      newUser:{
+        name: "",
+        userName:"",
+        gender:"",
+        password:"",
+        email: ""
+      },
+      userFireBase:{
+        password:"",
+        email: ""
+      },
+      search:''
     }
   },
   methods:{
-      
+      updateTitle:function(updateTitle){
+        this.title =updateTitle;
+      },
+      updateShowModalSignIn:function(){
+        this.showModalSignIn=true;
+      },
+      updateShowModalSignUp:function(){
+        this.showModalSignUp=true;
+      },
+      addUser: function () {
+        if (this.isValid) {
+          usersRef.push(this.newUser)
+          this.newUser.name = '';
+          this.newUser.email = '';
+        }
+      },
   },
   created(){
-  },
-  computed:{
-  
-  },
+    this.$http.get('https://jsonplaceholder.typicode.com/users').then(function(data){
+      console.log(data);
+      this.listUsers = data.body.slice(0,6);
+    })
+    this.$http.get('https://projetweb-9605d.firebaseio.com/user.json').then(function(data){
+      console.log(data);
+      return data.json();
+    }).then(function(data){
+      var usersArray =[];
+      for(let key in data){
+        data[key].id= key
+        usersArray.push(data[key])
+      }
+      console.log(data)
+      this.listUsers = usersArray;
+    }),
+
+    bus.$on('userFireBaseChange',(data)=>{
+      console.log("userFireBaseChange");
+      this.userFireBase = data;
+      console.log(this.userFireBase);
+      firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(this.userFireBase.email,this.userFireBase.password).then(
+        function(user) {
+          alert('Your accout has been created !')
+        },
+        function(err){
+          alert("Oops "+ err.message)
+        }
+      );
+    })
+  }
 }
 </script>
 <style scopped>

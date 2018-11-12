@@ -21,7 +21,6 @@
    <button class="buttonForm"  v-on:click="deleteMenu" >Ajouter Utilisateur </button>
 </div>
 </template>
-
 <script>
 export default {
     props:{

@@ -2,7 +2,9 @@
 <header>
 <ul>
   <li><router-link to="/">AFRICAN-FOOD </router-link></li>
-  <li><router-link to="/mention">Mention Légales</router-link></li>
+  <li><router-link to="/user">Vos ajouts</router-link></li>
+  <li><router-link to="/admin">Admin</router-link></li>
+<li><router-link to="/mention">Mention Légales</router-link></li>
   <li v-on:click="changeShowModalSignIn"  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" >Sign in</a></li>
   <li v-on:click="changeShowModalSignUp" style="float:right"><a  v-on:click="changeShowModalSignUp" >Sign up</a></li>
 </ul>
