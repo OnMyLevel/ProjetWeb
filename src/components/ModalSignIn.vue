@@ -35,6 +35,7 @@
 
 <script>
 import '@fortawesome/fontawesome-free';
+import {bus} from '../main';
 
 export default {
   components:{

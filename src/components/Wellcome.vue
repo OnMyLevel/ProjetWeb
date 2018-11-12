@@ -20,7 +20,7 @@
      <hr/>
      <br>
      <app-footer></app-footer>
-      <modal-sign-in v-bind:newUser="newUser" v-if="showModalSignIn" @close="showModalSignIn = false">
+      <modal-sign-in v-bind:newUser="newUser" v-bind:userFireBase="userFireBase" v-if="showModalSignIn" @close="showModalSignIn = false">
       </modal-sign-in>
       <modal-sign-up v-if="showModalSignUp" @close="showModalSignUp = false">
       </modal-sign-up>
@@ -29,6 +29,7 @@
 </div>
 </template>
 <script>
+
 import Header from './Header.vue';
 import Footer from './Footer.vue';
 import Menus from './Menus.vue';
@@ -40,8 +41,16 @@ import ModalSignUp from './ModalSignUp.vue';
 import ModalSignIn from './ModalSignIn.vue';
 import ModalAddMenu from './AddMenu.vue';
 import '@fortawesome/fontawesome-free';
+import {bus} from '../main';
+import firebase from 'firebase';
 
 export default {
+
+  props:{
+    userFireBase:{
+     type: JSON
+  },
+  },
   components:{
       'app-header':Header,
       'app-footer': Footer,
@@ -82,6 +91,10 @@ export default {
         password:"",
         email: ""
       },
+      userFireBase:{
+        password:"",
+        email: ""
+      },
       search:''
     }
   },
@@ -115,6 +128,20 @@ export default {
       }
       console.log(data)
       this.listUsers = usersArray;
+    }),
+
+    bus.$on('userFireBaseChange',(data)=>{
+      console.log("userFireBaseChange");
+      this.userFireBase = data;
+      console.log(this.userFireBase);
+      firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(this.userFireBase.email,this.userFireBase.password).then(
+        function(user) {
+          alert('Your accout has been created !')
+        },
+        function(err){
+          alert("Oops "+ err.message)
+        }
+      );
     })
   },
   // computed property for form validation state

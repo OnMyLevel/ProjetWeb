@@ -4,13 +4,12 @@
  import SignIn from './components/ModalSignIn.vue'
  import SignUp from './components/ModalSignUp.vue'
  
-
-
- 
  export default[
      {path:'/',component:Wellcome},
      {path:'/mention',component:Mention},
      {path:'/menu/:id',component: SingleMenu},
      {path:'/signIn',component: SignIn},
-     {path:'/signUp',component: SignUp}
+     {path:'/signUp',component: SignUp},
+     {path:'/signUp',component: SignUp},
+
  ]

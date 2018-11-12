@@ -4,7 +4,8 @@ import VueResource from 'vue-resource'
 import VueRouteur from 'vue-router'
 import '@fortawesome/fontawesome-free';
 import VueRouter from 'vue-router';
-import Routes from './routers'
+import Routes from './routers';
+import firebase from 'firebase';
 
 export const bus = new Vue();
 
@@ -42,6 +43,17 @@ Vue.directive('rainbow', {
     el.style.color = "#" + Math.random().toString().slice(2,8)+";";
   }
 });
+
+ // Initialize Firebase
+ var config = {
+  apiKey: "AIzaSyAo4oz_JBEb4KrYzEcicCRT-xSq6JUwg38",
+  authDomain: "projetweb-9605d.firebaseapp.com",
+  databaseURL: "https://projetweb-9605d.firebaseio.com",
+  projectId: "projetweb-9605d",
+  storageBucket: "projetweb-9605d.appspot.com",
+  messagingSenderId: "469810391449"
+};
+firebase.initializeApp(config);
 
 new Vue({
   el: '#app',

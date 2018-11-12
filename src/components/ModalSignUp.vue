@@ -47,8 +47,8 @@
                <hr/>
               <div class="modal-footer">
                 <slot name="footer">
-                  <button class="modal-default-button" @click="$emit('close')">Cancel</button>
-                  <button v-on:click.prevent="addUser" @click="$emit('close')" class="modal-default-button" type="submit">Sign Up</button>
+                  <button class="modal-default-button" @click="$emit('close')">Close</button>
+                  <button v-on:click="valideUserFirebase(),$emit('close'); " class="modal-default-button" type="submit">Sign Up</button>
                 </slot>
               </div>
             </div>
@@ -58,9 +58,16 @@
 </template>
 <script>
 import '@fortawesome/fontawesome-free';
+import {bus} from '../main';
 
 export default {
+  props:{
+    userfireBase:{
+      type: JSON
+    }
+  },
   components:{
+  
   },
   data(){
     return {
@@ -74,45 +81,27 @@ export default {
       },
       userTypes:['Admin',
         'User',
-      ]
-    }
-  },
-  // computed property for form validation state
-  computed: {
-    validation: function () {
-      return {
-        name: !!this.newUser.name.trim(),
-        email: emailRE.test(this.newUser.email)
+      ],
+       userfireBase:{
+        password:" ",
+        email: " "
       }
-    },
-    isValid: function () {
-      var validation = this.validation
-      return Object.keys(validation).every(function (key) {
-        return validation[key]
-      })
+
     }
   },
   methods:{
-      updateTitle:function(updateTitle){
-        this.title = updateTitle;
-      },
-      updateShowModalSignIn:function(){
-        this.showModalSignIn= true;
-      },
-      updateShowModalSignUp:function(){
-        this.showModalSignUp= true;
-      },
-      addUser:function () {
+    addUser:function () {
         console.log("ICI");
         this.$http.post('https://projetweb-9605d.firebaseio.com/user.json',this.newUser).then(function(data){
            console.log(data);
         });
-        /*if (this.isValid) {
-          usersRef.push(this.newUser)
-          this.newUser.name = '';
-          this.newUser.email = '';*/
-        }
-      },
+    },
+    valideUserFirebase:function(){
+      console.log("FIREBASE CONECTE");
+      console.log(this.newUser);
+      bus.$emit('userFireBaseChange',this.newUser);
+    }
+  }
   }
 </script>
 <style scopped>
