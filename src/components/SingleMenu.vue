@@ -17,7 +17,7 @@
                <hr/>
               <div class="modal-footer">
                 <slot name="footer">
-                  <button class="modal-default-button"> <router-link to="/"> Close </router-link></button>
+                  <button class="modal-default-button"><router-link to="/"> Close </router-link></button>
                 </slot>
               </div>
             </div>
@@ -164,6 +164,10 @@ user {
 #preview{
   border: 1px dotted #ccc;
   text-align: center;
+}
+
+router-link{ 
+  color: aliceblue;
 }
 
 

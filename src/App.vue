@@ -3,10 +3,11 @@
   <app-header  v-on:changeShowModalSignIn="updateShowModalSignIn($event)" v-on:changeTitle="updateTitle($event)"  
      v-on:changeShowModalSignUp="updateShowModalSignUp($event)" ></app-header>
      <hr/>
-    <router-view v-bind:menus="menus" v-bind:filteredMenus="filteredMenus" v-bind:listUsers="listUsers" v-bind:user="user"> </router-view>
+    <router-view v-bind:menus="menus" v-bind:listUsers="listUsers" v-bind:user="user"> </router-view>
+    <hr/>
     <app-footer></app-footer>
     <br>
-      <modal-sign-in v-bind:newUser="newUser" v-bind:userFireBase="userFireBase" v-if="showModalSignIn" @close="showModalSignIn = false">
+      <modal-sign-in v-bind:newUser="newUser"  v-if="showModalSignIn" @close="showModalSignIn = false">
       </modal-sign-in>
       <modal-sign-up v-if="showModalSignUp" @close="showModalSignUp = false">
       </modal-sign-up>
@@ -25,7 +26,6 @@ import AdminGui from './components/AdminGui.vue';
 import ModalSignUp from './components/ModalSignUp.vue';
 import ModalSignIn from './components/ModalSignIn.vue';
 import ModalAddMenu from './components/AddMenu.vue';
-import '@fortawesome/fontawesome-free';
 import {bus} from './main';
 import firebase from 'firebase';
 export default {
@@ -76,6 +76,10 @@ export default {
         password:"",
         email: ""
       },
+       currentUserFireBase:{
+        password:"",
+        email: ""
+      },
       search:''
     }
   },
@@ -98,10 +102,6 @@ export default {
       },
   },
   created(){
-    this.$http.get('https://jsonplaceholder.typicode.com/users').then(function(data){
-      console.log(data);
-      this.listUsers = data.body.slice(0,6);
-    })
     this.$http.get('https://projetweb-9605d.firebaseio.com/user.json').then(function(data){
       console.log(data);
       return data.json();
@@ -113,24 +113,14 @@ export default {
       }
       console.log(data)
       this.listUsers = usersArray;
-    }),
-
-    bus.$on('userFireBaseChange',(data)=>{
-      console.log("userFireBaseChange");
-      this.userFireBase = data;
-      console.log(this.userFireBase);
-      firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(this.userFireBase.email,this.userFireBase.password).then(
-        function(user) {
-          alert('Your accout has been created !')
-        },
-        function(err){
-          alert("Oops "+ err.message)
-        }
-      );
     })
   }
 }
 </script>
 <style scopped>
+
+router-link{ 
+  color: aliceblue;
+}
 
 </style>

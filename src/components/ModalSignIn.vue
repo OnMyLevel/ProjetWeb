@@ -11,9 +11,9 @@
               <div class="modal-body">
                 <slot name="body">
                   <form id="form">
-                        <input type="text"  placeholder="Username" required />
+                        <input type="text"  placeholder="Username" v-model.lazy="user.email" required />
                         <br>
-                        <input type="password"  placeholder="Password" required />
+                        <input type="password"  placeholder="Password" v-model.lazy="user.password" required />
                         <br>
                    </form>
                 </slot>
@@ -24,7 +24,7 @@
                 <slot name="footer">
                   <br>
                   <button class="modal-default-button" @click="$emit('close')">Cancel</button>
-                  <button  class="modal-default-button" type="submit" @click="$emit('close')" >Sign in</button>
+                  <button  class="modal-default-button" type="submit" v-on:click="valideUserFirebase(),$emit('close');" >Sign in</button>
                 </slot>
               </div>
             </div>
@@ -38,6 +38,11 @@ import '@fortawesome/fontawesome-free';
 import {bus} from '../main';
 
 export default {
+  props:{
+    currentUserfireBase:{
+      type: JSON
+    }
+  },
   components:{
   },
   data(){
@@ -46,26 +51,22 @@ export default {
            name: '',
            email: ''
       },
+      currentUserfireBase:{
+        password:" ",
+        email: " "
+      }
     }
   },
   // computed property for form validation state
   computed: {
-    validation: function () {
-      return {
-        name: !!this.newUser.name.trim(),
-        email: emailRE.test(this.newUser.email)
-      }
-    },
-    isValid: function () {
-      var validation = this.validation
-      return Object.keys(validation).every(function (key) {
-        return validation[key]
-      })
-    }
+    
   },
   methods:{
-      updateTitle:function(updateTitle){
-        this.title = updateTitle;
+
+      valideUserFirebase:function(){
+      console.log("FIREBASE CONECTE");
+      console.log(this.user);
+      bus.$emit('currentUserfireBaseChange',this.user);
       },
       updateShowModalSignIn:function(){
         this.showModalSignIn= true;
@@ -73,16 +74,6 @@ export default {
       updateShowModalSignUp:function(){
         this.showModalSignUp= true;
       },
-      connectUser: function () {
-        if (this.isValid) {
-          usersRef.push(this.newUser)
-          this.newUser.name = '';
-          this.newUser.email = '';
-        }
-      },
-      /*removeUser: function (user) {
-        usersRef.child(user['.key']).remove()
-      }*/
   }
 }
 </script>

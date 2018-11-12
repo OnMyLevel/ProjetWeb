@@ -13,7 +13,7 @@
      <br>
      <!--<hr/>-->
      <br>
-      <modal-sign-in v-bind:newUser="newUser" v-bind:userFireBase="userFireBase" v-if="showModalSignIn" @close="showModalSignIn = false">
+      <modal-sign-in v-bind:newUser="newUser" v-if="showModalSignIn" @close="showModalSignIn = false">
       </modal-sign-in>
       <modal-sign-up v-if="showModalSignUp" @close="showModalSignUp = false">
       </modal-sign-up>
@@ -33,7 +33,6 @@ import AdminGui from './AdminGui.vue';
 import ModalSignUp from './ModalSignUp.vue';
 import ModalSignIn from './ModalSignIn.vue';
 import ModalAddMenu from './AddMenu.vue';
-import '@fortawesome/fontawesome-free';
 import {bus} from '../main';
 import firebase from 'firebase';
 
@@ -41,8 +40,11 @@ export default {
 
   props:{
     userFireBase:{
-     type: JSON
-  },
+      type: JSON
+    },
+    currentUserFireBase:{
+      type: JSON
+    },
   },
   components:{
       'app-header':Header,
@@ -88,6 +90,10 @@ export default {
         password:"",
         email: ""
       },
+      currentUserFireBase:{
+        password:"",
+        email: ""
+      },
       search:''
     }
   },
@@ -110,6 +116,7 @@ export default {
       },
   },
   created(){
+    
     this.$http.get('https://projetweb-9605d.firebaseio.com/user.json').then(function(data){
       console.log(data);
       return data.json();
@@ -130,6 +137,20 @@ export default {
       firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(this.userFireBase.email,this.userFireBase.password).then(
         function(user) {
           alert('Your accout has been created !')
+        },
+        function(err){
+          alert("Oops "+ err.message)
+        }
+      );
+    })
+
+    bus.$on('currentUserfireBaseChange',(data)=>{
+      console.log("currentUserfireBaseChange");
+      this.currentUserFireBase = data;
+      console.log(this.currentUserFireBase);
+      firebase.auth().signInWithEmailAndPassword(this.currentUserFireBase.email,this.currentUserFireBase.password).then(
+        function(user) {
+          alert('Your are connect')
         },
         function(err){
           alert("Oops "+ err.message)
