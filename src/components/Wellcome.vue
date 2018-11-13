@@ -27,7 +27,6 @@ import Header from './Header.vue';
 import Footer from './Footer.vue';
 import Menus from './Menus.vue';
 import Banner from './Banner.vue';
-import formHelper from './FormHelper.vue';
 import MenuAdd from './MenuAdd.vue';
 import AdminGui from './AdminGui.vue';
 import ModalSignUp from './ModalSignUp.vue';
@@ -51,7 +50,6 @@ export default {
       'app-footer': Footer,
       'app-menus-public': Menus,
       'app-banner':Banner,
-      'app-form-helper': formHelper,
       'app-menus-user': MenuAdd,
       'app-admin-gui':AdminGui,
       'modal-sign-up':ModalSignUp,

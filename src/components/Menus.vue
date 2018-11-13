@@ -5,7 +5,7 @@
     <li v-for="menu in filteredMenus" :key="menu.id" v-on:click="menu.show = !menu.show">
         <h2>{{menu.name}}</h2>
          <router-link v-bind:to="'/menu/'+menu.id"> <h3 v-show="menu.show"> Details </h3> </router-link>
-          <button v-on:click="addComment = !addComment" id="btnAdd"> </button><button id="btnLike"> </button>
+          <!--<button v-on:click="addComment = !addComment" id="btnAdd">--> </button><button id="btnLike"> </button>
           <br>
           <hr>
           <input v-show="addComment" class="addCommentInput" type="text"/> 

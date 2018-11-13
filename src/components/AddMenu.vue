@@ -1,5 +1,4 @@
 <template>
-      <transition name="modal">
         <div class="modal-mask">
           <div class="modal-wrapper">
             <div class="modal-container">
@@ -47,14 +46,13 @@
                <hr/>
               <div class="modal-footer">
                 <slot name="footer">
-                  <button class="modal-default-button" @click="$emit('close')">Cancel</button>
-                  <button v-on:click.prevent="addUser" @click="$emit('close')" class="modal-default-button" type="submit">Sign Up</button>
+                  <button class="modal-default-button" @click="$emit('close')"><router-link to="/"> Cancel  </router-link></button>
+                  <button v-on:click.prevent="addUser" @click="$emit('close')" class="modal-default-button" type="submit"><router-link to="/"> Sign Up </router-link></button>
                 </slot>
               </div>
             </div>
           </div>
         </div>
-      </transition>
 </template>
 
 <script>
@@ -108,10 +106,6 @@ export default {
         this.$http.post('https://jsonplaceholder.typicode.com/posts',this.newUser).then(function(data){
            console.log(data);
         });
-        /*if (this.isValid) {
-          usersRef.push(this.newUser)
-          this.newUser.name = '';
-          this.newUser.email = '';*/
         }
       },
   }
