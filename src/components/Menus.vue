@@ -5,12 +5,9 @@
     <li v-for="menu in filteredMenus" :key="menu.id" v-on:click="menu.show = !menu.show">
         <h2>{{menu.name}}</h2>
          <router-link v-bind:to="'/menu/'+menu.id"> <h3 v-show="menu.show"> Details </h3> </router-link>
-          <!--<button v-on:click="addComment = !addComment" id="btnAdd">--> </button><button id="btnLike"> </button>
-          <br>
+           <button id="btnLike"> </button>
           <hr>
-          <input v-show="addComment" class="addCommentInput" type="text"/> 
-          <br>
-          <button v-show="addComment" class="addCommentButton"> Ajouter </button>
+          <h4> {{menu.show}} </h4>  
      </li>
   </ul>
 </div>
@@ -87,6 +84,10 @@ li{
   height: 55px;
   border-radius: 30px;
   border-color: black;
+}
+
+h4{
+  color: black
 }
 #btnLike{
   align-self: center;
