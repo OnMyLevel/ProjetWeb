@@ -4,12 +4,19 @@
   <ul>
     <li v-for="menu in filteredMenus" :key="menu.id">
         <h2 v-on:click="menu.show = !menu.show">{{menu.name}}</h2>
-         <router-link v-bind:to="'/menu/'+menu.id"> <p v-show="menu.show">Temps de preparation: {{menu.time}}
+           <p v-show="menu.show">
+           Catégorie  {{menu.type}}
            <br>
-           Préparation:{{menu.description}}
+           Temps de preparation {{menu.time}} .min
            <br>
-           Nombre de personne:{{menu.nombres}}
-            </p> </router-link>
+           Préparation:
+            <br>
+           {{menu.description}}
+           <br>
+           Nombre de personnes
+            <br>
+           {{menu.nombres}}
+            </p>
            <button v-on:click="ajouter(menu)" id="btnLike"> </button>
           <hr>  
            <h4> {{menu.like}} </h4>
@@ -165,7 +172,7 @@ a:hover {
 }
 
 p {
-  background-color: orange;
+  background-color: burlywood;
   text-decoration: none;  
 }
 

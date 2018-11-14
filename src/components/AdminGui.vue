@@ -10,14 +10,14 @@
   </ul>
    <button class="buttonForm" v-on:click="deleteMenu" >Ajouter un menus </button>
   <hr>
-  <p id="listUser">
+    <h2> Utilisateurs sur l'application </h2>
+   <p id="listUser">
     <span id="user" v-for="user in  listUsers" :key="user.id" v-on:click="user.show = !user.show">
       <h2 v-rainbow >{{user.name | to-uppercase }}</h2>
       <h3 v-show="user.show">{{user.email}}</h3>
       <br>
     </span>
   </p>
-   <button class="buttonForm"  v-on:click="deleteMenu" >Ajouter Utilisateur </button>
 </div>
 </template>
 <script>

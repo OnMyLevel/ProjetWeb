@@ -24,7 +24,7 @@
                 <slot name="footer">
                   <br>
                   <button class="modal-default-button" @click="$emit('close')">Cancel</button>
-                  <button  class="modal-default-button" type="submit" v-on:click="valideUserFirebase(),$emit('close');" ><router-link to="/admin">Connect</router-link></button>
+                  <router-link to="/admin"><button  class="modal-default-button" type="submit" v-on:click="valideUserFirebase(),$emit('close');" >Connect</button></router-link>
                 </slot>
               </div>
             </div>

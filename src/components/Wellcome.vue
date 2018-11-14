@@ -99,13 +99,6 @@ export default {
       updateShowModalSignUp:function(){
         this.showModalSignUp=true;
       },
-      addUser: function () {
-        if (this.isValid) {
-          usersRef.push(this.newUser)
-          this.newUser.name = '';
-          this.newUser.email = '';
-        }
-      },
   },
   created(){
     
