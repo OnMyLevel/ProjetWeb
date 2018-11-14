@@ -1,6 +1,8 @@
 <template>
 <div id="menus">
-  <p>{{title}} </p>
+ 
+   <h2>{{title}} </h2> 
+
   <ul>
     <li v-for="menu in filteredMenus" :key="menu.id">
         <h2 v-on:click="menu.show = !menu.show">{{menu.name}}</h2>
@@ -41,7 +43,7 @@ export default {
   name: 'app',
   data () {
     return {
-       title:'Listes of Menus',
+       title:'Quelques Recettes',
     }
   },
   methods:{
@@ -61,6 +63,9 @@ export default {
 <style scoped>
  p{
   text-align:  center;
+ }
+ h2{
+   text-align: center;
  }
  #menus{
     width: 100%;

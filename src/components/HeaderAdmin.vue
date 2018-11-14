@@ -1,8 +1,8 @@
 <template>
 <header>
 <ul>
-  <li><router-link to="">AFRICAN-FOOD</router-link></li>
-  <router-link to="/"><li  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" >Log out</a></li></router-link>
+  <li><router-link to="">Interface Admin</router-link></li>
+  <router-link to="/"><li  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" > Quitter </a></li></router-link>
   <li v-if="user.email" v-on:click="changeShowModalSignUp" style="float:right"> {{user.mail}}</li>
 </ul>
  <app-banner> </app-banner>

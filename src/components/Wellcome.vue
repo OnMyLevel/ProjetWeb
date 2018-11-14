@@ -66,7 +66,7 @@ export default {
       formDisplay:true,
       showModalSignIn: false,
       showModalSignUp: false,
-     showModalAddmenu: false,
+      showModalAddmenu: false,
       user: {
            name: 'meril',
            email: 'meril@gmail.com'

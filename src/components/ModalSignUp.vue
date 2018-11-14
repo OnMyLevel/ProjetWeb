@@ -5,7 +5,7 @@
             <div class="modal-container">
 
               <div class="modal-header">
-                ***************** Your Id ******************
+                <p>Veuilliez remplir le formulaire :</p>
               </div>
                 <hr/>
               <div class="modal-body">
@@ -13,21 +13,21 @@
                       <form id="form" >
                         <div id="checkboxes">
                           <label>Man </label>
-                          <input type="radio" value="Mr" v-model.lazy="newUser.gender" />
+                          <input type="radio" value="Mr" v-model.lazy="newUser.gender" required/>
                           <label>Woman </label>
-                          <input type="radio" value="Mrs" v-model.lazy="newUser.gender" />
+                          <input type="radio" value="Mme" v-model.lazy="newUser.gender" required/>
                         </div>
                         <br>
-                        <input type="text" placeholder="Name" v-model.lazy="newUser.name" required/>
+                        <input type="text" placeholder="votre nom" v-model.lazy="newUser.name" required/>
                         <br>
-                        <input type="text" placeholder="Username" v-model.lazy="newUser.userName" required/>
+                        <input type="text" placeholder="votre prenom" v-model.lazy="newUser.userName" required/>
                         <br>
-                        <input type="password" placeholder="Password" v-model.lazy="newUser.password" required/>
+                        <input type="password" placeholder="votre mot de passe" v-model.lazy="newUser.password" required/>
                         <br>
-                        <input type="email"  placeholder="email@email.com" v-model.lazy="newUser.email" required/>
+                        <input type="email"  placeholder="votre email" v-model.lazy="newUser.email" required/>
                         <br>
                         <br>
-                        <label> User-type</label>
+                        <label> Particulier ou Professionelle ? </label>
                         <select v-model="newUser.userType">
                             <option v-for="userType in userTypes" :key="userType.id" > {{userType}}</option> 
                         </select>
@@ -36,7 +36,7 @@
                       <br>
                       <hr/>
                       <div id="preview">
-                        <h4>Your new account :</h4>
+                        <h4>Information du compte</h4>
                         <p> {{ newUser.userType}}</p>
                         <p>{{newUser.gender}} {{newUser.name}}</p>
                         <p>{{newUser.userName}}</p>
@@ -79,8 +79,8 @@ export default {
         password:"",
         email: ""
       },
-      userTypes:['Admin',
-        'User',
+      userTypes:['Professionelle',
+        'Particulier',
       ],
        userfireBase:{
         password:" ",

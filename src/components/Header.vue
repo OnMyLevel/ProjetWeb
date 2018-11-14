@@ -2,9 +2,9 @@
 <header>
 <ul>
   <li><router-link to="/">AFRICAN-FOOD </router-link></li>
-  <li v-on:click="changeShowModalAddMenu" > <a v-on:click="changeShowModalAddMenu" class="active" >Add Menu</a></li>
-  <li v-on:click="changeShowModalSignIn"  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" >Connect Admin</a></li>
-  <li v-on:click="changeShowModalSignUp" style="float:right"><a  v-on:click="changeShowModalSignUp" >Become Admin ? </a></li>
+  <li v-on:click="changeShowModalAddMenu" > <a v-on:click="changeShowModalAddMenu" class="active" >Ajouter une Recette</a></li>
+  <li v-on:click="changeShowModalSignIn"  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" >Conexion Admin </a></li>
+  <li v-on:click="changeShowModalSignUp" style="float:right"><a  v-on:click="changeShowModalSignUp" > Inscription  Admin </a></li>
 </ul>
  <app-banner> </app-banner>
 </header>

@@ -3,7 +3,7 @@
           <div class="modal-wrapper">
             <div class="modal-container">
               <div class="modal-header">
-                *********************** Your Menu ***********************
+                Remplire votre Recette
               </div>
                 <hr/>
               <div class="modal-body">
@@ -23,7 +23,7 @@
                        <input type="number"  placeholder="time for cook" v-model.lazy="menu.time" required/>
                        <br>
                        <br>
-                        <textarea rows="7" cols="63" v-model.lazy="menu.description" required>
+                        <textarea rows="10" cols="46" v-model.lazy="menu.description" required>
                         </textarea>
                         <br>
                       </form>

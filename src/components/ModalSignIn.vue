@@ -5,15 +5,15 @@
             <div class="modal-container">
 
               <div class="modal-header">
-                  ***************** Your Id ******************
+                  Vos identifiants
               </div>
                <hr/>
               <div class="modal-body">
                 <slot name="body">
                   <form id="form">
-                        <input type="text"  placeholder="Username" v-model.lazy="user.email" required />
+                        <input type="email"  placeholder="nomre adresse mail" v-model.lazy="user.email" required />
                         <br>
-                        <input type="password"  placeholder="Password" v-model.lazy="user.password" required />
+                        <input type="password"  placeholder="votre mot de passe" v-model.lazy="user.password" required />
                         <br>
                    </form>
                 </slot>

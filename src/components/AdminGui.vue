@@ -11,7 +11,7 @@
       <button id="btnRemoveMenu"> </button>
     </li>
   </ul>
-   <button class="buttonForm" v-on:click="deleteMenu" >Ajouter un menus </button>
+   <button v-on:click="changeShowModalAddMenu()" class="buttonForm">Ajouter un menus </button>
   <hr>
     <h2> Utilisateurs sur l'application </h2>
    <p id="listUser">
@@ -22,14 +22,19 @@
     </span>
   </p>
 </div>
+ <modal-add-Menu v-if="showModalAddmenu" @close="showModalAddmenu = false">
+  </modal-add-Menu>
 </div>
 </template>
+
 <script>
 import Header from './HeaderAdmin.vue';
+import ModalAddMenu from './AddMenu.vue';
 
 export default {
     components:{
       'app-header':Header,
+      'modal-add-Menu':ModalAddMenu
     },
     props:{
       menus:{
@@ -46,8 +51,8 @@ export default {
       filteredlistUser:{
         type: Array,
         required: true
-      }
-
+      },
+      showModalAddmenu: false,
     },
   name: 'app',
   data () {
@@ -59,6 +64,10 @@ export default {
   methods:{
     deleteMenu:function(){
       this.menus.pop();
+    },
+    changeShowModalAddMenu:function(){
+       console.log("ICI 2");
+      this.showModalAddmenu=true;
     }
   },
 }
