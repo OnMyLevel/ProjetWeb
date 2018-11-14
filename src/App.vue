@@ -1,6 +1,6 @@
 <template>
  <div> 
-    <router-view v-bind:menus="menus" v-bind:listUsers="listUsers" v-bind:user="user"> </router-view>
+    <router-view v-bind:firebase="firebase" v-bind:menus="menus" v-bind:listUsers="listUsers" v-bind:user="user"> </router-view>
     <hr/>
     <app-footer></app-footer>
     <br>
@@ -24,6 +24,7 @@ import ModalSignIn from './components/ModalSignIn.vue';
 import ModalAddMenu from './components/AddMenu.vue';
 import {bus} from './main';
 import firebase from 'firebase';
+import session from 'vue-session';
 
 
 export default {
@@ -42,37 +43,38 @@ export default {
       
   },
   data(){
-        return {
-      menus:[
-        ],
-      listUsers:[],
-      title:'Menus',
-      component:'app-menus-public',
-      formDisplay:true,
-      showModalSignIn: false,
-      showModalSignUp: false,
-      showModalAddmenu: false,
-      user: {
-           name: 'meril',
-           email: 'meril@gmail.com'
-      },
-      newUser:{
-        name: "",
-        userName:"",
-        gender:"",
-        password:"",
-        email: ""
-      },
-      userFireBase:{
-        password:"",
-        email: ""
-      },
-       currentUserFireBase:{
-        password:"",
-        email: ""
-      },
-      search:''
-    }
+      return {
+          menus:[
+            ],
+          listUsers:[],
+          formDisplay:true,
+          showModalSignIn: false,
+          showModalSignUp: false,
+          showModalAddmenu: false,
+          user: {
+              name: 'meril',
+              email: 'meril@gmail.com'
+          },
+          newUser:{
+            name: "",
+            userName:"",
+            gender:"",
+            password:"",
+            email: ""
+          },
+          userFireBase:{
+            password:"",
+            email: ""
+          },
+          currentUserFireBase:{
+            password:"",
+            email: ""
+          },
+          search:'',
+          firebase:{
+            name:firebase
+          }
+        }
   },
   methods:{
       updateTitle:function(updateTitle){

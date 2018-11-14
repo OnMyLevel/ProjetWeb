@@ -9,6 +9,7 @@ import firebase from 'firebase';
 import VueSession from 'vue-session';
 import VueSessionStorage from 'vue-sessionstorage';
 
+
 Vue.use(VueResource);
 Vue.use(VueRouteur);
 Vue.use(VueSession);
@@ -59,6 +60,10 @@ Vue.directive('rainbow', {
   messagingSenderId: "469810391449"
 };
 firebase.initializeApp(config);
+
+export const db = firebase.database();
+export const menuRef = db.ref('menu');
+export const userRef = db.ref('user');
 
 new Vue({
   el: '#app',

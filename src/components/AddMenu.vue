@@ -29,15 +29,15 @@
                       </form>
                       <hr/>
                       <div id="preview">
-                        <p>Votre recette: {{menu.name}}</p>
+                        <p>Recette: {{menu.name}}</p>
                       </div>
                 </slot>
               </div>
                <hr/>
               <div class="modal-footer">
                 <slot name="footer">
-                  <router-link to="/"><button class="modal-default-button" @click="$emit('close')"> Quitter </button></router-link>
-                  <router-link to="/"><button v-on:click.prevent="addMenu(),valideMenuFirebase(),$emit('close'); "  class="modal-default-button" type="submit"> Ajouter </button></router-link>
+                  <router-link to="/" @click="$emit('close')" ><button class="modal-default-button"> Quitter </button></router-link>
+                  <router-link to="/" v-on:click.prevent="addMenu(),valideMenuFirebase(),$emit('close'); " ><button class="modal-default-button" type="submit"> Ajouter </button></router-link>
                 </slot>
               </div>
             </div>

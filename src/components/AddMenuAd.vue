@@ -1,59 +1,73 @@
 <template>
-       <transition name="modal">
         <div class="modal-mask">
           <div class="modal-wrapper">
             <div class="modal-container">
-
               <div class="modal-header">
-                  Vos identifiants
+                Remplire votre Recette
               </div>
-               <hr/>
+                <hr/>
               <div class="modal-body">
                 <slot name="body">
-                  <form id="form">
-                        <input type="email"  placeholder="nomre adresse mail" v-model.lazy="user.email" required />
+                      <form id="form" >
+                         <label> Type </label>
+                        <select v-model="menu.type">
+                            <option v-for="type in types" :key="type.id" > {{type}}</option> 
+                        </select>
                         <br>
-                        <input type="password"  placeholder="votre mot de passe" v-model.lazy="user.password" required />
+                        <input type="text" placeholder="nom de la recette" v-model.lazy="menu.name" required/>
                         <br>
-                   </form>
+                        <input type="number" placeholder="nombre de personnes" v-model.lazy="menu.nombres" required/>
+                        <br>
+                        <input type="text" placeholder=" votre email" v-model.lazy="menu.mail" required/>
+                        <br>
+                       <input type="number"  placeholder="temps de preparation" v-model.lazy="menu.time" required/>
+                       <br>
+                       <br>
+                        <textarea rows="10" cols="64" v-model.lazy="menu.description" required>
+                        </textarea>
+                        <br>
+                      </form>
+                      <hr/>
+                      <div id="preview">
+                        <p>Votre recette: {{menu.name}}</p>
+                      </div>
                 </slot>
               </div>
                <hr/>
-               <br>
               <div class="modal-footer">
                 <slot name="footer">
-                  <br>
-                  <button class="modal-default-button" @click="$emit('close')">Quitter</button>
-                  <router-link to="/admin"><button  class="modal-default-button" type="submit" v-on:click="valideUserFirebase(),$emit('close');" >Connexion</button></router-link>
+                  <router-link to="/admin"><button class="modal-default-button" @click="$emit('close')"> Quitter </button></router-link>
+                  <router-link to="/admin"><button v-on:click.prevent="addMenu(),valideMenuFirebase(),$emit('close'); "  class="modal-default-button" type="submit"> Ajouter </button></router-link>
                 </slot>
               </div>
             </div>
           </div>
         </div>
-      </transition>
 </template>
 
 <script>
 import '@fortawesome/fontawesome-free';
-import {bus} from '../main';
+import { functions } from 'firebase';
+
 export default {
-  props:{
-    currentUserfireBase:{
-      type: JSON
-    }
-  },
   components:{
   },
   data(){
     return {
-     user: {
-           name: '',
-           email: ''
+      menu:{
+        id:"",
+        name:"",
+        type:"",
+        description:"",
+        mail:"",
+        time:0,
+        likes:0,
+        nombres:0,
+        show:false
       },
-      currentUserfireBase:{
-        password:" ",
-        email: " "
-      },
+      types:['Entré',
+        'Plat','Dessert'
+      ],
     }
   },
   // computed property for form validation state
@@ -61,33 +75,42 @@ export default {
     
   },
   methods:{
+      addMenu:function () {
+        console.log("ICI");
+        this.menu.time =0;
+        this.$http.post('https://projetweb-9605d.firebaseio.com/menu.json',this.menu).then(function(data){
+        console.log(data);
 
-      valideUserFirebase:function(){
-      console.log("FIREBASE CONECTE");
-      console.log(this.user);
-        bus.$emit('currentUserfireBaseChange',this.user);
-        bus.$emit('currentUserConnect',this.user);
-        
-        
+        const formData = new FormData();
+        formData.append('myFile', this.menu.file, this.menu.file.name)
+        this.$http.post('gs://projetweb-9605d.appspot.com/file-upload', formData).then(function(data){
+          console.log(formData);
+          });
+        });
+        },
+
+      onFileSelected:function(event){
+        console.log(event);
+        this.menu.file = event.target.files[0];
+        console.log(this.menu.file)
       },
-      updateShowModalSignIn:function(){
-        this.showModalSignIn= true;
-      },
-      updateShowModalSignUp:function(){
-        this.showModalSignUp= true;
-      },
+      onUploadFile:function(event){
+        console.log(event);
+        this.menu.file.name = ''+this.menu.name+'_'+this.file.name
+        console.log(this.menu.file.name);
+      }
   }
-}
+
+  }
 </script>
 <style scopped>
-
 hr{
   border-color : orange;
   size: 15px;
 }
 .buttonForm{
   height: 100%;
-	padding:6px 0 6px 0;
+	padding:7px 0 7px 0;
 	font:bold 13px Arial;
 	background:orange;
 	color:#fff;
@@ -117,7 +140,7 @@ button:hover {
 }
 
 .modal-container {
-  width: 300px;
+  width: 400px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -148,7 +171,7 @@ button:hover {
   margin-left: 10%; 
 }
 
-.modal-body input[type=text], input[type=email],input[type=password] {
+.modal-body input[type=text], input[type=email],select,input[type=number],input[type=file] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -156,6 +179,11 @@ button:hover {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+input[type=area]{
+  width: 100%;
+  height: 13em;
 }
 
 .modal-body input[type=submit] {
@@ -218,4 +246,8 @@ user {
 a{
   color: white;
 }
+a:link 
+{ 
+text-decoration:none; 
+} 
 </style>

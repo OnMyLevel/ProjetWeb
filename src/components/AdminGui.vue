@@ -4,32 +4,35 @@
      v-on:changeShowModalSignUp="updateShowModalSignUp($event)" ></app-header>
 <div id="menus">
   <ul >
-    <li v-for="menu in menus" :key="menu.id" v-on:click="menu.show = !menu.show">
+    <li v-for="menu in menus" v-bind:key="menu.id" v-on:click="menu.show = !menu.show">
       <h2>{{menu.name}}</h2>
       <h3 v-show="menu.show">{{menu.speciality}}</h3>
       <br>
-      <button id="btnRemoveMenu"> </button>
+      <button v-on:click="removeMenu(menu.id)" id="btnRemoveMenu"> </button>
     </li>
   </ul>
-   <button v-on:click="changeShowModalAddMenu()" class="buttonForm">Ajouter un menus </button>
+   <button v-on:click="changeShowModalAddMenu()" class="buttonForm">Ajouter une recette </button>
   <hr>
     <h2> Utilisateurs sur l'application </h2>
    <p id="listUser">
-    <span id="user" v-for="user in  listUsers" :key="user.id" v-on:click="user.show = !user.show">
+    <span id="user" v-for="user in  listUsers" v-bind:key="user.id" v-on:click="user.show = !user.show">
       <h2 v-rainbow >{{user.name | to-uppercase }}</h2>
       <h3 v-show="user.show">{{user.email}}</h3>
       <br>
     </span>
   </p>
 </div>
- <modal-add-Menu v-if="showModalAddmenu" @close="showModalAddmenu = false">
-  </modal-add-Menu>
+<!-- <modal-add-Menu v-if="showModalAddmenu" @close="showModalAddmenu = false">
+  </modal-add-Menu>-->
 </div>
 </template>
 
 <script>
 import Header from './HeaderAdmin.vue';
-import ModalAddMenu from './AddMenu.vue';
+import ModalAddMenu from './AddMenuAd.vue';
+import {menuRef} from '../main';
+import {userRef} from '../main';
+
 
 export default {
     components:{
@@ -48,8 +51,7 @@ export default {
       user:{
         required: true
       },
-      filteredlistUser:{
-        type: Array,
+      firebase:{
         required: true
       },
       showModalAddmenu: false,
@@ -57,16 +59,18 @@ export default {
   name: 'app',
   data () {
     return {
-       title:'GUI for the ADMIN ',
-       search:''
+       search:'',
     }
   },
   methods:{
-    deleteMenu:function(){
-      this.menus.pop();
+   removeMenu:function(key){
+      console.log(key);
+      menuRef.child(key).remove();
+      console.log(nameRef.child(key));
+      this.$forceUpdate();
     },
     changeShowModalAddMenu:function(){
-       console.log("ICI 2");
+      console.log("ICI 2");
       this.showModalAddmenu=true;
     }
   },

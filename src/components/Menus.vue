@@ -4,7 +4,7 @@
    <h2>{{title}} </h2> 
 
   <ul>
-    <li v-for="menu in filteredMenus" :key="menu.id">
+    <li v-for="menu in filteredMenus" v-bind:key="menu.id">
         <h2 v-on:click="menu.show = !menu.show">{{menu.name}}</h2>
            <p v-show="menu.show">
            <span>Catégorie: </span> {{menu.type}}
@@ -17,7 +17,7 @@
            <br>
            <span> Nombre de personnes: </span>{{ menu.nombres}}.p
             </p>
-           <button v-on:click="menu.likes++" id="btnLike"> </button>
+           <button v-on:click="menu.likes++,updateMenu(menu.id,menu.likes);" id="btnLike"> </button>
           <hr>  
            <h4>{{menu.likes}} LIKE</h4>
      </li>
@@ -25,6 +25,8 @@
 </div>
 </template>
 <script>
+import {menuRef} from '../main';
+import {userRef} from '../main';
 export default {
     props:{
       menus:{
@@ -44,13 +46,12 @@ export default {
     }
   },
   methods:{
-    updateMenu:function(data){
-      console.log("ICI");
-      this.$http.post('https://projetweb-9605d.firebaseio.com/menu.json/'+this.menuVar.id,menu).then(function(data){
-      console.log(data);
-    });
-  },
-}
+      updateMenu:function(key,number){      
+        menuRef.child(key).update({ likes:number});
+        console.log(number);
+        this.$forceUpdate();
+    },
+  }
 }
 </script>
 <style scoped>
@@ -183,7 +184,12 @@ span{
 }
 
 h4{
-  color:rgb(243, 18, 55);
+  color: greenyellow;
   font-size: 40px;
 }
+h4:hover{
+  background-color: white;
+}
+
+
 </style>
