@@ -14,30 +14,30 @@
                             <option v-for="type in types" :key="type.id" > {{type}}</option> 
                         </select>
                         <br>
-                        <input type="text" placeholder="name of menu" v-model.lazy="menu.name" required/>
+                        <input type="text" placeholder="nom de la recette" v-model.lazy="menu.name" required/>
                         <br>
-                        <input type="number" placeholder="name of menu" v-model.lazy="menu.nombres" required/>
+                        <input type="number" placeholder="nombre de personnes" v-model.lazy="menu.nombres" required/>
                         <br>
-                        <input type="text" placeholder="your e-mail" v-model.lazy="menu.mail" required/>
+                        <input type="text" placeholder=" votre email" v-model.lazy="menu.mail" required/>
                         <br>
-                       <input type="number"  placeholder="time for cook" v-model.lazy="menu.time" required/>
+                       <input type="number"  placeholder="temps de preparation" v-model.lazy="menu.time" required/>
                        <br>
                        <br>
-                        <textarea rows="10" cols="46" v-model.lazy="menu.description" required>
+                        <textarea rows="10" cols="64" v-model.lazy="menu.description" required>
                         </textarea>
                         <br>
                       </form>
                       <hr/>
                       <div id="preview">
-                        <p>Menu name:{{menu.name}}</p>
+                        <p>Votre recette: {{menu.name}}</p>
                       </div>
                 </slot>
               </div>
                <hr/>
               <div class="modal-footer">
                 <slot name="footer">
-                  <router-link to="/"><button class="modal-default-button" @click="$emit('close')"> Cancel </button></router-link>
-                  <router-link to="/"><button v-on:click.prevent="addMenu(),valideMenuFirebase(),$emit('close'); "  class="modal-default-button" type="submit"> Sign Up</button></router-link>
+                  <router-link to="/"><button class="modal-default-button" @click="$emit('close')"> Quitter </button></router-link>
+                  <router-link to="/"><button v-on:click.prevent="addMenu(),valideMenuFirebase(),$emit('close'); "  class="modal-default-button" type="submit"> Ajouter </button></router-link>
                 </slot>
               </div>
             </div>

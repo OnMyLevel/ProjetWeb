@@ -47,8 +47,8 @@
                <hr/>
               <div class="modal-footer">
                 <slot name="footer">
-                  <button class="modal-default-button" @click="$emit('close')">Close</button>
-                  <button v-on:click="valideUserFirebase(),$emit('close'); " class="modal-default-button" type="submit">Sign Up</button>
+                  <button class="modal-default-button" @click="$emit('close')">Quitter</button>
+                  <button v-on:click="valideUserFirebase(),$emit('close'); " class="modal-default-button" type="submit">Créer</button>
                 </slot>
               </div>
             </div>

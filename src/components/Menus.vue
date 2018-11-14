@@ -7,26 +7,23 @@
     <li v-for="menu in filteredMenus" :key="menu.id">
         <h2 v-on:click="menu.show = !menu.show">{{menu.name}}</h2>
            <p v-show="menu.show">
-           Catégorie  {{menu.type}}
+           <span>Catégorie: </span> {{menu.type}}
            <br>
-           Temps de preparation {{menu.time}} .min
+          <span> Temps de préparation:  </span>{{menu.time}} .min
            <br>
-           Préparation:
+           <span>Description et étapes</span>
             <br>
            {{menu.description}}
            <br>
-           Nombre de personnes
-            <br>
-           {{menu.nombres}}
+           <span> Nombre de personnes: </span>{{ menu.nombres}}.p
             </p>
-           <button v-on:click="ajouter(menu)" id="btnLike"> </button>
+           <button v-on:click="menu.likes++" id="btnLike"> </button>
           <hr>  
-           <h4> {{menu.like}} </h4>
+           <h4>{{menu.likes}} LIKE</h4>
      </li>
   </ul>
 </div>
 </template>
-
 <script>
 export default {
     props:{
@@ -47,12 +44,8 @@ export default {
     }
   },
   methods:{
-    ajouter:function(data){
-      var menuVar=null;
-      menuVar=data;
-      menuVar.like +=1;
+    updateMenu:function(data){
       console.log("ICI");
-      console.log(menuVar.like);
       this.$http.post('https://projetweb-9605d.firebaseio.com/menu.json/'+this.menuVar.id,menu).then(function(data){
       console.log(data);
     });
@@ -185,4 +178,12 @@ a:link
 { 
 text-decoration:none; 
 } 
+span{
+  color: rgb(15, 9, 1);
+}
+
+h4{
+  color:rgb(243, 18, 55);
+  font-size: 40px;
+}
 </style>
