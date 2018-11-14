@@ -1,7 +1,7 @@
 <template>
  <div> 
      <app-header  v-on:changeShowModalSignIn="updateShowModalSignIn($event)" v-on:changeTitle="updateTitle($event)"  
-     v-on:changeShowModalSignUp="updateShowModalSignUp($event)" ></app-header>
+     v-on:changeShowModalSignUp="updateShowModalSignUp($event)" v-on:changeShowModalAddMenu="changeShowModalAddMenu($event)" ></app-header>
      <hr/>
         <!-- Search form -->
       <div>
@@ -15,8 +15,8 @@
       </modal-sign-in>
       <modal-sign-up v-if="showModalSignUp" @close="showModalSignUp = false">
       </modal-sign-up>
-      <modal-add-menu v-if="showModalAddmenu" @close="showModalAddmenu = false">
-      </modal-add-menu>
+      <modal-add-Menu v-if="showModalAddmenu" @close="showModalAddmenu = false">
+      </modal-add-Menu>
 </div>
 </template>
 <script>
@@ -66,7 +66,7 @@ export default {
       formDisplay:true,
       showModalSignIn: false,
       showModalSignUp: false,
-      showModalAddmenu: false,
+     showModalAddmenu: false,
       user: {
            name: 'meril',
            email: 'meril@gmail.com'
@@ -98,6 +98,10 @@ export default {
       },
       updateShowModalSignUp:function(){
         this.showModalSignUp=true;
+      },
+     changeShowModalAddMenu:function(){
+       console.log("ICI 2");
+        this.showModalAddmenu=true;
       },
   },
   created(){
