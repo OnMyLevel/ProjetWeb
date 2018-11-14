@@ -1,8 +1,5 @@
 <template>
  <div> 
-  <app-header  v-on:changeShowModalSignIn="updateShowModalSignIn($event)" v-on:changeTitle="updateTitle($event)"  
-     v-on:changeShowModalSignUp="updateShowModalSignUp($event)" ></app-header>
-     <hr/>
     <router-view v-bind:menus="menus" v-bind:listUsers="listUsers" v-bind:user="user"> </router-view>
     <hr/>
     <app-footer></app-footer>
@@ -27,6 +24,8 @@ import ModalSignIn from './components/ModalSignIn.vue';
 import ModalAddMenu from './components/AddMenu.vue';
 import {bus} from './main';
 import firebase from 'firebase';
+
+
 export default {
 
   

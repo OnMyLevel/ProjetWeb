@@ -36,8 +36,8 @@
                <hr/>
               <div class="modal-footer">
                 <slot name="footer">
-                  <button class="modal-default-button" @click="$emit('close')"><router-link to="/"> Cancel  </router-link></button>
-                  <button v-on:click.prevent="addMenu(),valideMenuFirebase(),$emit('close'); "  class="modal-default-button" type="submit"><router-link to="/"> Sign Up </router-link></button>
+                  <router-link to="/"><button class="modal-default-button" @click="$emit('close')"> Cancel </button></router-link>
+                  <router-link to="/"><button v-on:click.prevent="addMenu(),valideMenuFirebase(),$emit('close'); "  class="modal-default-button" type="submit"> Sign Up</button></router-link>
                 </slot>
               </div>
             </div>

@@ -1,10 +1,9 @@
 <template>
 <header>
 <ul>
-  <li><router-link to="/">AFRICAN-FOOD </router-link></li>
-  <li><router-link to="/add">Add new Menu</router-link></li>
-  <li v-on:click="changeShowModalSignIn"  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" >Connect Admin</a></li>
-  <li v-on:click="changeShowModalSignUp" style="float:right"><a  v-on:click="changeShowModalSignUp" >Become Admin ? </a></li>
+  <li><router-link to="">AFRICAN-FOOD</router-link></li>
+  <router-link to="/"><li  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" >Log out</a></li></router-link>
+  <li v-if="user.email" v-on:click="changeShowModalSignUp" style="float:right"> {{user.mail}}</li>
 </ul>
  <app-banner> </app-banner>
 </header>
@@ -23,25 +22,29 @@ export default {
       },
       search:{
           type:String
+      },
+      user:{
+          type:JSON
       }
   },
   data () {
     return {
-        title:'AFRICAN FOOD'
+        title:'AFRICAN FOOD',
+        user:{
+            mail:"your email",
+            password:""
+        }
     }
   },
   methods:{
-      changeTitle:function(){
-        this.title= "CHANGE-BUS"
-        bus.$emit('titleChanged','CHANGE-BUS');
-      },
-      changeShowModalSignIn:function(){
-        this.$emit('changeShowModalSignIn',true);
-      },
-      changeShowModalSignUp:function(){
-        this.$emit('changeShowModalSignUp',true);
-      }
+      
   },
+  created(){
+      bus.$on('currentUserConnect',(data)=>{
+      console.log("currentUser");
+      this.user = data;
+  })
+  }
 }
 </script>
 <style scoped>

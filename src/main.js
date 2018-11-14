@@ -6,16 +6,18 @@ import '@fortawesome/fontawesome-free';
 import VueRouter from 'vue-router';
 import Routes from './routers';
 import firebase from 'firebase';
-import VueSession from 'vue-session'
-
-
-export const bus = new Vue();
+import VueSession from 'vue-session';
+import VueSessionStorage from 'vue-sessionstorage';
 
 Vue.use(VueResource);
 Vue.use(VueRouteur);
-Vue.use(VueSession)
+Vue.use(VueSession);
+Vue.use(VueSessionStorage);
 
-const router = new VueRouter({
+export const session = VueSession;
+
+export const bus = new Vue();
+export const router = new VueRouter({
   routes : Routes,
   mode:'history'
 })
@@ -63,4 +65,6 @@ new Vue({
   render: h => h(App),
   router: router
 })
+
+
 

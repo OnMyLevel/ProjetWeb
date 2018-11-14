@@ -1,4 +1,7 @@
 <template>
+<div>
+<app-header  v-on:changeShowModalSignIn="updateShowModalSignIn($event)" v-on:changeTitle="updateTitle($event)"  
+     v-on:changeShowModalSignUp="updateShowModalSignUp($event)" ></app-header>
 <div id="menus">
   <ul >
     <li v-for="menu in menus" :key="menu.id" v-on:click="menu.show = !menu.show">
@@ -19,9 +22,15 @@
     </span>
   </p>
 </div>
+</div>
 </template>
 <script>
+import Header from './HeaderAdmin.vue';
+
 export default {
+    components:{
+      'app-header':Header,
+    },
     props:{
       menus:{
         type: Array,

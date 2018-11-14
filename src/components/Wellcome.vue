@@ -1,17 +1,15 @@
 <template>
  <div> 
-     <!--<app-header  v-on:changeShowModalSignIn="updateShowModalSignIn($event)" v-on:changeTitle="updateTitle($event)"  
+     <app-header  v-on:changeShowModalSignIn="updateShowModalSignIn($event)" v-on:changeTitle="updateTitle($event)"  
      v-on:changeShowModalSignUp="updateShowModalSignUp($event)" ></app-header>
-     <hr/>-->
+     <hr/>
         <!-- Search form -->
       <div>
         <input class="active" type="text"  v-model="search" placeholder="Search" />
       </div>
      <component v-bind:menus="menus" v-bind:filteredMenus="filteredMenus" v-bind:listUsers="listUsers" v-bind:user="user" v-bind:is="component"> </component>
      <hr/>
-     <!--<app-form-helper v-show="formDisplay" id="formulaire"></app-form-helper>-->
      <br>
-     <!--<hr/>-->
      <br>
       <modal-sign-in v-bind:newUser="newUser" v-if="showModalSignIn" @close="showModalSignIn = false">
       </modal-sign-in>
@@ -34,6 +32,8 @@ import ModalSignIn from './ModalSignIn.vue';
 import ModalAddMenu from './AddMenu.vue';
 import {bus} from '../main';
 import firebase from 'firebase';
+import VueRouter from 'vue-router';
+import VueSession from 'vue-session';
 
 export default {
 
@@ -134,10 +134,10 @@ export default {
       console.log(this.userFireBase);
       firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(this.userFireBase.email,this.userFireBase.password).then(
         function(user) {
-          alert('Your accout has been created !')
+          alert('Your accout has been created !');
         },
         function(err){
-          alert("Oops "+ err.message)
+          alert("Oops "+ err.message);
         }
       );
     })
@@ -148,7 +148,8 @@ export default {
       console.log(this.currentUserFireBase);
       firebase.auth().signInWithEmailAndPassword(this.currentUserFireBase.email,this.currentUserFireBase.password).then(
         function(user) {
-          alert('Your are connect')
+          bus.$emit('currentUserConnect',data);
+          alert('Your are connect');
         },
         function(err){
           alert("Oops "+ err.message)
