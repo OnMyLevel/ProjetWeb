@@ -2,12 +2,17 @@
 <div id="menus">
   <p>{{title}} </p>
   <ul>
-    <li v-for="menu in filteredMenus" :key="menu.id" v-on:click="menu.show = !menu.show">
-        <h2>{{menu.name}}</h2>
-         <router-link v-bind:to="'/menu/'+menu.id"> <h3 v-show="menu.show"> Details </h3> </router-link>
-           <button id="btnLike"> </button>
-          <hr>
-          <h4> {{menu.show}} </h4>  
+    <li v-for="menu in filteredMenus" :key="menu.id">
+        <h2 v-on:click="menu.show = !menu.show">{{menu.name}}</h2>
+         <router-link v-bind:to="'/menu/'+menu.id"> <p v-show="menu.show">Temps de preparation: {{menu.time}}
+           <br>
+           Préparation:{{menu.description}}
+           <br>
+           Nombre de personne:{{menu.nombres}}
+            </p> </router-link>
+           <button v-on:click="ajouter(menu)" id="btnLike"> </button>
+          <hr>  
+           <h4> {{menu.like}} </h4>
      </li>
   </ul>
 </div>
@@ -33,10 +38,17 @@ export default {
     }
   },
   methods:{
-    deleteMenu:function(){
-      this.menus.pop();
-    }
+    ajouter:function(data){
+      var menuVar=null;
+      menuVar=data;
+      menuVar.like +=1;
+      console.log("ICI");
+      console.log(menuVar.like);
+      this.$http.post('https://projetweb-9605d.firebaseio.com/menu.json/'+this.menuVar.id,menu).then(function(data){
+      console.log(data);
+    });
   },
+}
 }
 </script>
 <style scoped>
@@ -145,5 +157,20 @@ button:hover {
 router-link{ 
   color: aliceblue;
 }
+a{
+  color: white;
+}
+a:hover {
+    background-color: orange;
+}
 
+p {
+  background-color: orange;
+  text-decoration: none;  
+}
+
+a:link 
+{ 
+text-decoration:none; 
+} 
 </style>

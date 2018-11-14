@@ -15,7 +15,6 @@
       <h2 v-rainbow >{{user.name | to-uppercase }}</h2>
       <h3 v-show="user.show">{{user.email}}</h3>
       <br>
-       <button id="btnRemoveUser"> </button>
     </span>
   </p>
    <button class="buttonForm"  v-on:click="deleteMenu" >Ajouter Utilisateur </button>

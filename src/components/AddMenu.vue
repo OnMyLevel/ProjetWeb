@@ -2,44 +2,34 @@
         <div class="modal-mask">
           <div class="modal-wrapper">
             <div class="modal-container">
-
               <div class="modal-header">
-                Please fill in this form to create an account
+                *********************** Your Menu ***********************
               </div>
                 <hr/>
               <div class="modal-body">
                 <slot name="body">
                       <form id="form" >
-                        <div id="checkboxes">
-                          <label>Man </label>
-                          <input type="radio" value="Mr" v-model.lazy="newUser.gender" />
-                          <label>Woman </label>
-                          <input type="radio" value="Mrs" v-model.lazy="newUser.gender" />
-                        </div>
-                        <br>
-                        <input type="text" placeholder="Name" v-model.lazy="newUser.name" required/>
-                        <br>
-                        <input type="text" placeholder="Username" v-model.lazy="newUser.userName" required/>
-                        <br>
-                        <input type="password" placeholder="Password" v-model.lazy="newUser.password" required/>
-                        <br>
-                        <input type="email"  placeholder="email@email.com" v-model.lazy="newUser.email" required/>
-                        <br>
-                        <br>
-                        <label> User-type</label>
-                        <select v-model="newUser.userType">
-                            <option v-for="userType in userTypes" :key="userType.id" > {{userType}}</option> 
+                         <label> Type </label>
+                        <select v-model="menu.type">
+                            <option v-for="type in types" :key="type.id" > {{type}}</option> 
                         </select>
                         <br>
+                        <input type="text" placeholder="name of menu" v-model.lazy="menu.name" required/>
+                        <br>
+                        <input type="number" placeholder="name of menu" v-model.lazy="menu.nombres" required/>
+                        <br>
+                        <input type="text" placeholder="your e-mail" v-model.lazy="menu.mail" required/>
+                        <br>
+                       <input type="number"  placeholder="time for cook" v-model.lazy="menu.time" required/>
+                       <br>
+                       <br>
+                        <textarea rows="7" cols="63" v-model.lazy="menu.description" required>
+                        </textarea>
+                        <br>
                       </form>
-                      <br>
                       <hr/>
                       <div id="preview">
-                        <h4>Your new account :</h4>
-                        <p> {{ newUser.userType}}</p>
-                        <p>{{newUser.gender}} {{newUser.name}}</p>
-                        <p>{{newUser.userName}}</p>
-                        <p>{{newUser.email}}</p>
+                        <p>Menu name:{{menu.name}}</p>
                       </div>
                 </slot>
               </div>
@@ -47,7 +37,7 @@
               <div class="modal-footer">
                 <slot name="footer">
                   <button class="modal-default-button" @click="$emit('close')"><router-link to="/"> Cancel  </router-link></button>
-                  <button v-on:click.prevent="addUser" @click="$emit('close')" class="modal-default-button" type="submit"><router-link to="/"> Sign Up </router-link></button>
+                  <button v-on:click.prevent="addMenu(),valideMenuFirebase(),$emit('close'); "  class="modal-default-button" type="submit"><router-link to="/"> Sign Up </router-link></button>
                 </slot>
               </div>
             </div>
@@ -57,57 +47,60 @@
 
 <script>
 import '@fortawesome/fontawesome-free';
+import { functions } from 'firebase';
 
 export default {
   components:{
   },
   data(){
     return {
-      newUser:{
-        userType:"",
-        name: "",
-        userName:"",
-        gender:"",
-        password:"",
-        email: ""
+      menu:{
+        id:"",
+        name:"",
+        type:"",
+        description:"",
+        mail:"",
+        time:0,
+        likes:0,
+        nombres:0,
+        show:false
       },
-      userTypes:['Admin',
-        'User',
-      ]
+      types:['Entré',
+        'Plat','Dessert'
+      ],
     }
   },
   // computed property for form validation state
   computed: {
-    validation: function () {
-      return {
-        name: !!this.newUser.name.trim(),
-        email: emailRE.test(this.newUser.email)
-      }
-    },
-    isValid: function () {
-      var validation = this.validation
-      return Object.keys(validation).every(function (key) {
-        return validation[key]
-      })
-    }
+    
   },
   methods:{
-      updateTitle:function(updateTitle){
-        this.title = updateTitle;
-      },
-      updateShowModalSignIn:function(){
-        this.showModalSignIn= true;
-      },
-      updateShowModalSignUp:function(){
-        this.showModalSignUp= true;
-      },
-      addUser:function () {
+      addMenu:function () {
         console.log("ICI");
-        this.$http.post('https://jsonplaceholder.typicode.com/posts',this.newUser).then(function(data){
-           console.log(data);
+        this.menu.time =0;
+        this.$http.post('https://projetweb-9605d.firebaseio.com/menu.json',this.menu).then(function(data){
+        console.log(data);
+
+        const formData = new FormData();
+        formData.append('myFile', this.menu.file, this.menu.file.name)
+        this.$http.post('gs://projetweb-9605d.appspot.com/file-upload', formData).then(function(data){
+          console.log(formData);
+          });
         });
-        }
+        },
+
+      onFileSelected:function(event){
+        console.log(event);
+        this.menu.file = event.target.files[0];
+        console.log(this.menu.file)
       },
+      onUploadFile:function(event){
+        console.log(event);
+        this.menu.file.name = ''+this.menu.name+'_'+this.file.name
+        console.log(this.menu.file.name);
+      }
+  }
+
   }
 </script>
 <style scopped>
@@ -117,7 +110,7 @@ hr{
 }
 .buttonForm{
   height: 100%;
-	padding:6px 0 6px 0;
+	padding:7px 0 7px 0;
 	font:bold 13px Arial;
 	background:orange;
 	color:#fff;
@@ -147,7 +140,7 @@ button:hover {
 }
 
 .modal-container {
-  width: 300px;
+  width: 400px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -178,7 +171,7 @@ button:hover {
   margin-left: 10%; 
 }
 
-.modal-body input[type=text], input[type=email],input[type=password] {
+.modal-body input[type=text], input[type=email],select,input[type=number],input[type=file] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -186,6 +179,11 @@ button:hover {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+input[type=area]{
+  width: 100%;
+  height: 13em;
 }
 
 .modal-body input[type=submit] {
@@ -245,4 +243,11 @@ user {
   border: 1px dotted #ccc;
   text-align: center;
 }
+a{
+  color: white;
+}
+a:link 
+{ 
+text-decoration:none; 
+} 
 </style>

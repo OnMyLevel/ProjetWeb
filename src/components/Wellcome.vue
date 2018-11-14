@@ -59,12 +59,6 @@ export default {
   data(){
     return {
       menus:[
-           {id:1,name:'Ryu', speciality:'Vue Components', show:false},
-           {id:2,name:'Crystal', speciality:'HTML Wizardy', show:false},
-           {id:3,name:'Hitoshi', speciality:'Click Events ', show:false},
-           {id:4,name:'Tango', speciality:'Conditionals', show:false},
-           {id:5,name:'Kami', speciality:'Webpack', show:false},
-           {id:6,name:'Yoshi', speciality:'Data Design', show:false}
         ],
       listUsers:[],
       title:'Menus',
@@ -121,11 +115,24 @@ export default {
     }).then(function(data){
       var usersArray =[];
       for(let key in data){
-        data[key].id= key
+        data[key].id= key;
         usersArray.push(data[key])
       }
       console.log(data)
       this.listUsers = usersArray;
+    }),
+
+    this.$http.get('https://projetweb-9605d.firebaseio.com/menu.json').then(function(data){
+      console.log(data);
+      return data.json();
+    }).then(function(data){
+      var menuArray =[];
+      for(let key in data){
+        data[key].id= key;
+        menuArray.push(data[key])
+      }
+      console.log(data)
+      this.menus = menuArray;
     }),
 
     bus.$on('userFireBaseChange',(data)=>{
@@ -205,5 +212,11 @@ input[type=text] {
 .active{
   border: 1px solid black;
   box-shadow: 0 0 0 1px black;
+}
+a{
+  color: white;
+}
+a:hover {
+    background-color: orange;
 }
 </style>

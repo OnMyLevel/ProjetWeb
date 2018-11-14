@@ -5,7 +5,7 @@
             <div class="modal-container">
 
               <div class="modal-header">
-                Please fill in this form to create an account
+                ***************** Your Id ******************
               </div>
                 <hr/>
               <div class="modal-body">
@@ -91,7 +91,7 @@ export default {
   methods:{
     addUser:function () {
         console.log("ICI");
-        this.$http.post('https://projetweb-9605d.firebaseio.com/user.json',this.newUser).then(function(data){
+        this.$http.post('https://projetweb-9605d.firebaseio.com/menu.json',this.newUser).then(function(data){
            console.log(data);
         });
     },
@@ -209,6 +209,11 @@ button:hover {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+a:link 
+{ 
+text-decoration:none; 
+} 
 user {
   height: 30px;
   line-height: 30px;
@@ -237,5 +242,8 @@ user {
 #preview{
   border: 1px dotted #ccc;
   text-align: center;
+}
+a{
+  color: white;
 }
 </style>

@@ -45,12 +45,6 @@ export default {
   data(){
         return {
       menus:[
-           {id:1,name:'Ryu', speciality:'Vue Components', show:false},
-           {id:2,name:'Crystal', speciality:'HTML Wizardy', show:false},
-           {id:3,name:'Hitoshi', speciality:'Click Events ', show:false},
-           {id:4,name:'Tango', speciality:'Conditionals', show:false},
-           {id:5,name:'Kami', speciality:'Webpack', show:false},
-           {id:6,name:'Yoshi', speciality:'Data Design', show:false}
         ],
       listUsers:[],
       title:'Menus',
@@ -91,13 +85,6 @@ export default {
       updateShowModalSignUp:function(){
         this.showModalSignUp=true;
       },
-      addUser: function () {
-        if (this.isValid) {
-          usersRef.push(this.newUser)
-          this.newUser.name = '';
-          this.newUser.email = '';
-        }
-      },
   },
   created(){
     this.$http.get('https://projetweb-9605d.firebaseio.com/user.json').then(function(data){
@@ -112,6 +99,19 @@ export default {
       console.log(data)
       this.listUsers = usersArray;
     })
+
+     this.$http.get('https://projetweb-9605d.firebaseio.com/menu.json').then(function(data){
+      console.log(data);
+      return data.json();
+    }).then(function(data){
+      var menuArray =[];
+      for(let key in data){
+        data[key].id= key
+        menuArray.push(data[key])
+      }
+      console.log(data)
+      this.menus = menuArray;
+    })
   }
 }
 </script>
@@ -120,5 +120,10 @@ export default {
 router-link{ 
   color: aliceblue;
 }
-
+a{
+  color: white;
+}
+a:hover {
+    background-color: orange;
+}
 </style>

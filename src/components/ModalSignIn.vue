@@ -5,7 +5,7 @@
             <div class="modal-container">
 
               <div class="modal-header">
-                   Please fill in this form to connect on your account
+                  ***************** Your Id ******************
               </div>
                <hr/>
               <div class="modal-body">
@@ -212,5 +212,8 @@ user {
 #preview{
   border: 1px dotted #ccc;
   text-align: center;
+}
+a{
+  color: white;
 }
 </style>

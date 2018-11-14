@@ -6,11 +6,14 @@ import '@fortawesome/fontawesome-free';
 import VueRouter from 'vue-router';
 import Routes from './routers';
 import firebase from 'firebase';
+import VueSession from 'vue-session'
+
 
 export const bus = new Vue();
 
 Vue.use(VueResource);
 Vue.use(VueRouteur);
+Vue.use(VueSession)
 
 const router = new VueRouter({
   routes : Routes,

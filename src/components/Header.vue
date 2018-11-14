@@ -3,8 +3,6 @@
 <ul>
   <li><router-link to="/">AFRICAN-FOOD </router-link></li>
   <li><router-link to="/add">Add new Menu</router-link></li>
-  <!--<li><router-link to="/admin">Admin</router-link></li>-->
- <li><router-link to="/mention">Legale Mention </router-link></li>
   <li v-on:click="changeShowModalSignIn"  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" >Connect Admin</a></li>
   <li v-on:click="changeShowModalSignUp" style="float:right"><a  v-on:click="changeShowModalSignUp" >Become Admin ? </a></li>
 </ul>
