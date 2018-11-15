@@ -3,46 +3,46 @@
 <ul>
   <li><router-link to="">Interface Admin</router-link></li>
   <router-link to="/"><li  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" > Quitter </a></li></router-link>
-  <li v-if="user.email" v-on:click="changeShowModalSignUp" style="float:right"> {{user.mail}}</li>
+  <li  style="float:right">{{this.user.mail}} </li>
 </ul>
  <app-banner> </app-banner>
 </header>
 </template>
 <script>
 import Banner from './Banner.vue';
-import {bus}  from '../main';
+import {bus,currentUser}  from '../main';
 
 export default {
   components:{
       'app-banner':Banner
   },
   props:{
-      title:{
-          type:String
-      },
       search:{
           type:String
       },
-      user:{
-          type:JSON
-      }
   },
   data () {
     return {
-        title:'AFRICAN FOOD',
         user:{
-            mail:"your email",
+            mail:"",
             password:""
         }
     }
   },
   methods:{
+
+      setUser:function(data){
+      this.user.mail = data.email;
+      this.user.password= data.password;    
+      }
       
   },
   created(){
       bus.$on('currentUserConnect',(data)=>{
-      console.log("currentUser");
-      this.user = data;
+      this.user.mail = data.email;
+      this.user.password= data.password;
+      console.log("LALALALA");
+      this.setUser(data);
   })
   }
 }

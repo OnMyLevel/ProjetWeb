@@ -5,5 +5,5 @@
  export default[
      {path:'/',component:Wellcome},
      {path:'/add',component: AddMennu},
-     {path:'/admin',component: Admin}
+     {path:'/admin/',component: Admin}
  ]

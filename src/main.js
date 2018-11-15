@@ -66,6 +66,7 @@ export const storage = firebase.storage();
 
 export const menuRef = db.ref('menu');
 export const userRef = db.ref('user');
+export var currentUser= null;
 
 
 new Vue({

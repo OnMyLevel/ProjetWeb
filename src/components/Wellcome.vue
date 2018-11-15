@@ -143,14 +143,13 @@ export default {
     })
 
     bus.$on('currentUserfireBaseChange',(data)=>{
-      console.log("currentUserfireBaseChange");
       this.currentUserFireBase = data;
-      console.log(this.currentUserFireBase);
       firebase.auth().signInWithEmailAndPassword(this.currentUserFireBase.email,this.currentUserFireBase.password).then(
         function(user) {
           bus.$emit('currentUserConnect',data);
           alert('Your are connect');
           this.user = data;
+          console.log("ICI CICI")
           console.log(this.user);
         },
         function(err){
