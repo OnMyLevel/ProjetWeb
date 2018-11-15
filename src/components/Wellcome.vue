@@ -78,10 +78,6 @@ export default {
         password:"",
         email: ""
       },
-      userFireBase:{
-        password:"",
-        email: ""
-      },
       currentUserFireBase:{
         password:"",
         email: ""
@@ -154,6 +150,8 @@ export default {
         function(user) {
           bus.$emit('currentUserConnect',data);
           alert('Your are connect');
+          this.user = data;
+          console.log(this.user);
         },
         function(err){
           alert("Oops "+ err.message)

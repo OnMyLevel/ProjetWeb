@@ -62,8 +62,11 @@ Vue.directive('rainbow', {
 firebase.initializeApp(config);
 
 export const db = firebase.database();
+export const storage = firebase.storage();
+
 export const menuRef = db.ref('menu');
 export const userRef = db.ref('user');
+
 
 new Vue({
   el: '#app',

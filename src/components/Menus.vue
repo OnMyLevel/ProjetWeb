@@ -11,9 +11,7 @@
            <br>
           <span> Temps de préparation:  </span>{{menu.time}} .min
            <br>
-           <span>Description et étapes</span>
-            <br>
-           {{menu.description}}
+           <span>Description et étapes: </span> {{menu.description}}
            <br>
            <span> Nombre de personnes: </span>{{ menu.nombres}}.p
             </p>
@@ -129,8 +127,16 @@ router-link:hover{
   border-color: orange;
 }
 
-li h2:hover{
+li h2{
   background-color:tomato;
+}
+li h2:hover{
+  background-color: white;
+  color: greenyellow
+}
+li h2::selection{
+  background-color: white;
+  color: greenyellow
 }
 
 img{
@@ -186,6 +192,7 @@ span{
 h4{
   color: greenyellow;
   font-size: 40px;
+  background-color: white;
 }
 h4:hover{
   background-color: white;
