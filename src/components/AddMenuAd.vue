@@ -99,8 +99,7 @@ export default {
         this.menu.file.name = ''+this.menu.name+'_'+this.file.name
         console.log(this.menu.file.name);
       }
-  }
-
+   }
   }
 </script>
 <style scopped>

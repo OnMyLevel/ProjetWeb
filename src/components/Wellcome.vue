@@ -31,7 +31,7 @@ import ModalSignUp from './ModalSignUp.vue';
 import ModalSignIn from './ModalSignIn.vue';
 import ModalAddMenu from './AddMenu.vue';
 import {bus} from '../main';
-import firebase from 'firebase';
+import firebase,{ functions } from 'firebase';
 import VueRouter from 'vue-router';
 import VueSession from 'vue-session';
 
@@ -99,6 +99,12 @@ export default {
        console.log("ICI 2");
         this.showModalAddmenu=true;
       },
+      setUser:function(data){
+        console.log("SET USER");
+        this.user =data;
+        console.log(this.user);
+
+      }
   },
   created(){
     
@@ -148,9 +154,9 @@ export default {
         function(user) {
           bus.$emit('currentUserConnect',data);
           alert('Your are connect');
-          this.user = data;
+          /*this.setUser(data);
           console.log("ICI CICI")
-          console.log(this.user);
+          console.log(this.user);*/
         },
         function(err){
           alert("Oops "+ err.message)
