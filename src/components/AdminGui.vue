@@ -25,6 +25,9 @@
           <br>
           Description:
           <br>
+          Image:
+           <br>
+          <input type="text"  placeholder="url de votre photo" v-model.lazy="menu.image" required/>
           <textarea rows="10" cols="64" v-model.lazy="menu.description" required>
           </textarea>
            <br>

@@ -6,6 +6,8 @@
   <ul>
     <li v-for="menu in filteredMenus" v-bind:key="menu.id">
         <h2 v-on:click="menu.show = !menu.show">{{menu.name}}</h2>
+        <p>{{menu.image}}<p>
+       <img url="menu.image" alt="menu.image">
            <p v-show="menu.show">
            <span>Catégorie: </span> {{menu.type}}
            <br>
@@ -197,6 +199,13 @@ h4{
 h4:hover{
   background-color: white;
 }
-
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+img:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
 
 </style>
