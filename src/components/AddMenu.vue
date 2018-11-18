@@ -37,7 +37,7 @@
               <div class="modal-footer">
                 <slot name="footer">
                   <router-link to="/" @click="$emit('close')" ><button @click="$emit('close')" class="modal-default-button"> Quitter </button></router-link>
-                  <router-link to="/" v-on:click.prevent="addMenu(),valideMenuFirebase(),$emit('close'); " ><button @click="$emit('close')" class="modal-default-button" type="submit"> Ajouter </button></router-link>
+                  <router-link to="/"><button v-on:click="addMenu(),$emit('close'); " class="modal-default-button" type="submit"> Ajouter </button></router-link>
                 </slot>
               </div>
             </div>
@@ -76,7 +76,7 @@ export default {
   },
   methods:{
       addMenu:function () {
-        console.log("ICI");
+        console.log("ICI 3");
         this.menu.time =0;
         this.$http.post('https://projetweb-9605d.firebaseio.com/menu.json',this.menu).then(function(data){
         console.log(data);

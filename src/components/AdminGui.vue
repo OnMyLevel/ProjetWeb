@@ -39,7 +39,7 @@
   </ul>
    <button v-on:click="changeShowModalAddMenu()" class="buttonForm">Ajouter une recette </button>
   <hr>
-    <h2> Utilisateurs sur l'application </h2>
+    <h2> les autres utilisateurs sur l'applications </h2>
    <p id="listUser">
     <span id="user" v-for="user in  listUsers" v-bind:key="user.id" v-on:click="user.show = !user.show">
       <h2 v-rainbow >{{user.name | to-uppercase }}</h2>
@@ -49,8 +49,6 @@
   </p>
 </div>
 <modal-add-Menu v-if="showModalAddmenu" @close="showModalAddmenu = false">
-  </modal-add-Menu>
-  <modal-add-Menu v-if="showModalEditMenu" @close="showModalEditMenu = false">
   </modal-add-Menu>
 </div>
 </template>
@@ -98,7 +96,7 @@ export default {
    removeMenu:function(key){
       console.log(key);
       menuRef.child(key).remove();
-      console.log(nameRef.child(key));
+      console.log(menuRef.child(key));
       this.$forceUpdate();
     },
     updateMenu:function(key,type,name,description,time,mail,nombres,likes){      
@@ -118,9 +116,9 @@ export default {
         console.log(key);
         //this.$forceUpdate();
     },
-     changeShowModalEditMenu:function(){
+     changeShowModalAddMenu:function(){
       console.log("ICI 2");
-      this.showModalEditMenu=true;
+     this.showModalAddmenu=true;
     }
   },
   created(){
