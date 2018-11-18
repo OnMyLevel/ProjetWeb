@@ -65,7 +65,9 @@ export default {
         time:0,
         likes:0,
         nombres:0,
-        show:false
+        show:false,
+        image:"",
+        comment:[]
       },
       types:['Entré',
         'Plat','Dessert'

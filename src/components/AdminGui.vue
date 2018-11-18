@@ -3,7 +3,7 @@
 <app-header  v-on:changeShowModalSignIn="updateShowModalSignIn($event)" v-on:changeTitle="updateTitle($event)"  
      v-on:changeShowModalSignUp="updateShowModalSignUp($event)" ></app-header>
 <div id="menus">
-  <h1>Mens present sur le site :</h1>
+  <h1>Recettes disponible sur le site:</h1>
   <ul >
     <li v-for="menu in menus" v-bind:key="menu.id">
       <h2>{{menu.name}}</h2>
@@ -43,7 +43,7 @@
   </ul>
    <button v-on:click="changeShowModalAddMenu()" class="buttonForm">Ajouter une recette </button>
   <hr>
-    <h2> les autres utilisateurs sur l'applications </h2>
+    <h2> Utilisateurs (admins) sur l'applications: </h2>
    <p id="listUser">
     <span id="user" v-for="user in  listUsers" v-bind:key="user.id" v-on:click="user.show = !user.show">
       <h2 v-rainbow >{{user.name | to-uppercase }}</h2>
@@ -101,12 +101,16 @@ export default {
       console.log(key);
       menuRef.child(key).remove();
       console.log(menuRef.child(key));
+      menus = menuRef.child;
       this.$forceUpdate();
+      this.$nextTick(() => {
+          console.log('re-render end')
+      })
     },
     updateMenu:function(key,type,name,description,time,mail,nombres,likes){      
          console.log("LALA");
           console.log(key);
-        menuRef.child(key).update({ 
+          menuRef.child(key).update({ 
             id:"",
             name:name,
             type:type,
@@ -122,7 +126,7 @@ export default {
     },
      changeShowModalAddMenu:function(){
       console.log("ICI 2");
-     this.showModalAddmenu=true;
+      this.showModalAddmenu=true;
     }
   },
   created(){

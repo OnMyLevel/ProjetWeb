@@ -22,6 +22,8 @@
                         <br>
                        <input type="number"  placeholder="temps de preparation" v-model.lazy="menu.time" required/>
                        <br>
+                       <input type="text"  placeholder="url de votre photo" v-model.lazy="menu.image" required/>
+                       <br>
                        <br>
                         <textarea rows="10" cols="64" v-model.lazy="menu.description" required>
                         </textarea>
@@ -63,7 +65,9 @@ export default {
         time:0,
         likes:0,
         nombres:0,
-        show:false
+        show:false,
+        image:"",
+        comment:[]
       },
       types:['Entré',
         'Plat','Dessert'
