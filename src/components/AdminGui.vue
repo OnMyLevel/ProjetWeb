@@ -3,6 +3,7 @@
 <app-header  v-on:changeShowModalSignIn="updateShowModalSignIn($event)" v-on:changeTitle="updateTitle($event)"  
      v-on:changeShowModalSignUp="updateShowModalSignUp($event)" ></app-header>
 <div id="menus">
+  <h1>Mens present sur le site :</h1>
   <ul >
     <li v-for="menu in menus" v-bind:key="menu.id">
       <h2>{{menu.name}}</h2>

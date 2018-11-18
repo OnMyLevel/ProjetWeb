@@ -1,13 +1,10 @@
 <template>
 <div id="menus">
- 
    <h2>{{title}} </h2> 
-
   <ul>
     <li v-for="menu in filteredMenus" v-bind:key="menu.id">
         <h2 v-on:click="menu.show = !menu.show">{{menu.name}}</h2>
-        <p>{{menu.image}}<p>
-       <img url="menu.image" alt="menu.image">
+       <img v-if="menu.image" v-bind:src="menu.image" alt="menu.image">
            <p v-show="menu.show">
            <span>Catégorie: </span> {{menu.type}}
            <br>
@@ -17,7 +14,8 @@
            <br>
            <span> Nombre de personnes: </span>{{ menu.nombres}}.p
             </p>
-           <button v-on:click="menu.likes++,updateMenu(menu.id,menu.likes);" id="btnLike"> </button>
+            <br>
+            <button v-on:click="menu.likes++,updateMenu(menu.id,menu.likes);" id="btnLike"> </button>
           <hr>  
            <h4>{{menu.likes}} LIKE</h4>
      </li>
@@ -201,8 +199,8 @@ h4:hover{
 }
 img {
     max-width: 100%;
-    height: auto;
-    border-radius: 50%;
+    height: 340px;
+    border-radius: 2%;
 }
 img:hover {
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
