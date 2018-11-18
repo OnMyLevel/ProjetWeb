@@ -2,7 +2,6 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueResource from 'vue-resource'
 import VueRouteur from 'vue-router'
-import '@fortawesome/fontawesome-free';
 import VueRouter from 'vue-router';
 import Routes from './routers';
 import firebase from 'firebase';

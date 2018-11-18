@@ -57,7 +57,6 @@
       </transition>
 </template>
 <script>
-import '@fortawesome/fontawesome-free';
 import {bus} from '../main';
 
 export default {
