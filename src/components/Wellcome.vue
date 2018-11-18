@@ -31,7 +31,10 @@ import ModalSignUp from './ModalSignUp.vue';
 import ModalSignIn from './ModalSignIn.vue';
 import ModalAddMenu from './AddMenu.vue';
 import {bus} from '../main';
-import firebase,{ functions } from 'firebase';
+import firebase from 'firebase/app'
+import 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
 import VueRouter from 'vue-router';
 import VueSession from 'vue-session';
 

@@ -4,7 +4,10 @@ import VueResource from 'vue-resource'
 import VueRouteur from 'vue-router'
 import VueRouter from 'vue-router';
 import Routes from './routers';
-import firebase from 'firebase';
+import firebase from 'firebase/app'
+import 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
 import VueSession from 'vue-session';
 import VueSessionStorage from 'vue-sessionstorage';
 

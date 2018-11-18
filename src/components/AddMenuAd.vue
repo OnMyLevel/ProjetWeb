@@ -49,7 +49,10 @@
 
 <script>
 import '@fortawesome/fontawesome-free';
-import { functions } from 'firebase';
+import firebase from 'firebase/app'
+import 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
 
 export default {
   components:{
