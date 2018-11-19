@@ -3,7 +3,7 @@
 <ul>
   <li><router-link to="/">A TABLE </router-link></li>
   <li v-on:click="changeShowModalAddMenu" > <a v-on:click="changeShowModalAddMenu" class="active" >Ajouter Votre Recette</a></li>
-  <li v-on:click="changeShowModalSignIn"  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" >Conexion Admin </a></li>
+  <li v-on:click="changeShowModalSignIn"  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" >Connexion Admin </a></li>
   <li v-on:click="changeShowModalSignUp" style="float:right"><a  v-on:click="changeShowModalSignUp" > Inscription  Admin </a></li>
 </ul>
  <app-banner> </app-banner>

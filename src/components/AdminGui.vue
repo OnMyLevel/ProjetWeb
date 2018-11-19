@@ -22,7 +22,7 @@
           <br>
           Email:<input type="text" placeholder=" votre email" v-model.lazy="menu.mail" required/>
           <br>
-          Ingrédients:<input type="text" v-if="menu.ingredients" placeholder=" vos ingrédients" v-model.lazy="menu.ingredients" required/>
+          Ingrédients:<input type="text"  placeholder=" vos ingrédients" v-model.lazy="menu.ingredients" required/>
           <br>
           Temps de preparation:<input type="number"  placeholder="temps de preparation" v-model.lazy="menu.time" required/>
           <br>

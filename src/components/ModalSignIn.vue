@@ -11,7 +11,7 @@
               <div class="modal-body">
                 <slot name="body">
                   <form id="form">
-                        <input type="email"  placeholder="nomre adresse mail" v-model.lazy="user.email" required />
+                        <input type="email"  placeholder=" adresse mail" v-model.lazy="user.email" required />
                         <br>
                         <input type="password"  placeholder="votre mot de passe" v-model.lazy="user.password" required />
                         <br>
