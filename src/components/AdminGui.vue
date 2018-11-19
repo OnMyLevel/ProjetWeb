@@ -105,17 +105,30 @@ export default {
       console.log(key);
       menuRef.child(key).remove();
       console.log(menuRef.child(key));
-      menus = menuRef.child;
+      this.menus = menuRef.child;
       this.$forceUpdate();
-      this.$nextTick(() => {
-          console.log('re-render end')
-      })
+      this.update();
     },
 
     setUser:function(data){
       console.log("setUser:function");
       this.user.mail = data.mail;
       this.user.password = data.password;
+    },
+    update:function(){
+      console.log("UPDATE");
+      this.$http.get('https://projetweb-9605d.firebaseio.com/menu.json').then(function(data){
+      console.log(data);
+        return data.json();
+      }).then(function(data){
+        var menuArray =[];
+        for(let key in data){
+          data[key].id= key
+          menuArray.push(data[key])
+        }
+        console.log(data)
+        this.menus = menuArray;
+      });
     },
     updateMenu:function(key,type,name,description,time,mail,nombres,likes){      
          console.log("LALA");
@@ -132,7 +145,7 @@ export default {
             show:false
           });
         console.log(key);
-        //this.$forceUpdate();
+        this.update();
     },
      changeShowModalAddMenu:function(){
       console.log("ICI 2");
