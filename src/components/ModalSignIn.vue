@@ -61,12 +61,11 @@ export default {
     
   },
   methods:{
-
       valideUserFirebase:function(){
       console.log("FIREBASE CONECTE");
       console.log(this.user);
         bus.$emit('currentUserfireBaseChange',this.user);
-        bus.$emit('currentUserConnect',this.user);
+       
       },
       updateShowModalSignIn:function(){
         this.showModalSignIn= true;

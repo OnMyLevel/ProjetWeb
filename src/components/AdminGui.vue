@@ -22,6 +22,8 @@
           <br>
           Email:<input type="text" placeholder=" votre email" v-model.lazy="menu.mail" required/>
           <br>
+          Ingrédients:<input type="text" v-if="menu.ingredients" placeholder=" vos ingrédients" v-model.lazy="menu.ingredients" required/>
+          <br>
           Temps de preparation:<input type="number"  placeholder="temps de preparation" v-model.lazy="menu.time" required/>
           <br>
           Description:
@@ -35,7 +37,7 @@
            <br>
           <button v-on:click="menu.show =false,updateMenu(menu.id,menu.type,menu.name,
           menu.description,menu.time,menu.mail,
-          menu.nombres,menu.likes);" class="modifier"> Modifier </button>
+          menu.nombres,menu.likes,menu.ingredients);" class="modifier"> Modifier </button>
           <br>
         </form>
      </div>
@@ -62,6 +64,8 @@ import Header from './HeaderAdmin.vue';
 import ModalAddMenu from './AddMenuAd.vue';
 import {menuRef} from '../app';
 import {userRef} from '../app';
+import {bus} from '../app';
+import { functions } from 'firebase';
 
 
 export default {
@@ -79,7 +83,7 @@ export default {
         required: true
       },
       user:{
-        required: true
+        type: Array,
       },
       firebase:{
         required: true
@@ -107,6 +111,12 @@ export default {
           console.log('re-render end')
       })
     },
+
+    setUser:function(data){
+      console.log("setUser:function");
+      this.user.mail = data.mail;
+      this.user.password = data.password;
+    },
     updateMenu:function(key,type,name,description,time,mail,nombres,likes){      
          console.log("LALA");
           console.log(key);
@@ -130,8 +140,13 @@ export default {
     }
   },
   created(){
-   
-  },
+    bus.$on('currentUserConnect',(data)=>{
+       console.log("LALALALA");
+      this.user.mail = data.email;
+      this.user.password= data.password;
+      this.setUser(data);
+  });
+  }
 }
 </script>
 <style scoped>

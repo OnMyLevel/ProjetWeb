@@ -156,7 +156,7 @@ export default {
       firebase.auth().signInWithEmailAndPassword(this.currentUserFireBase.email,this.currentUserFireBase.password).then(
         function(user) {
           console.log("ICI");
-          bus.$on('currentUserConnect',data);
+          bus.$emit('currentUserConnect',data);
           alert('Your are connect')
         },
         function(err){

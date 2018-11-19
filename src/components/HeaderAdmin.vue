@@ -2,8 +2,8 @@
 <header>
 <ul>
   <li><router-link to="">Interface Admin</router-link></li>
-  <router-link to="/"><li  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" > Quitter </a></li></router-link>
-   <li  style="float:right">{{this.user.mail}} </li>
+  <router-link to="/" @click="quitter()"><li  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" > Quitter </a></li></router-link>
+   <li style="float:right">{{this.user.mail}} </li>
 </ul>
  <app-banner> </app-banner>
 </header>
@@ -32,8 +32,12 @@ export default {
   methods:{
 
       setUser:function(data){
-      this.user.mail = data.email;
-      this.user.password= data.password;    
+        this.user.mail = data.email;
+        this.user.password= data.password; 
+        console.log(this.user);   
+      },
+      quitter:function(){
+         alert("Voulez vous vraiment quitter ? ");
       }
       
   },
@@ -43,7 +47,7 @@ export default {
       this.user.password= data.password;
       console.log("LALALALA");
       this.setUser(data);
-  })
+  });
   }
 }
 </script>

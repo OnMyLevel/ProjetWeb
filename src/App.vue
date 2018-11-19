@@ -22,7 +22,7 @@ import AdminGui from './components/AdminGui.vue';
 import ModalSignUp from './components/ModalSignUp.vue';
 import ModalSignIn from './components/ModalSignIn.vue';
 import ModalAddMenu from './components/AddMenu.vue';
-import {bus} from './app';
+import {bus, currentUser} from './app';
 import firebase from 'firebase';
 import session from 'vue-session';
 
@@ -99,7 +99,7 @@ export default {
       }
       console.log(data)
       this.listUsers = usersArray;
-    })
+    });
 
      this.$http.get('https://projetweb-9605d.firebaseio.com/menu.json').then(function(data){
       console.log(data);
@@ -112,7 +112,14 @@ export default {
       }
       console.log(data)
       this.menus = menuArray;
-    })
+    });
+     
+     bus.$on('currentUserConnect',(data)=>{
+      this.currentUser.mail = data.email;
+      this.currentUser.password= data.password;
+      console.log(this.currentUser);
+      localStorage.setItem(this.currentUser);
+   });
   }
 }
 </script>

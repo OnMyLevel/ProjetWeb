@@ -20,8 +20,9 @@
                         <br>
                         <input type="text" placeholder=" votre email" v-model.lazy="menu.mail" required/>
                         <br>
+                        <input type="text" placeholder=" les ingrédients" v-model.lazy="menu. ingredients" required/>
+                        <br>
                        <input type="number"  placeholder="temps de preparation" v-model.lazy="menu.time" required/>
-                       <br>
                        <br>
                        <input type="text"  placeholder="url de votre photo" v-model.lazy="menu.image" required/>
                        <br>
@@ -70,6 +71,7 @@ export default {
         nombres:0,
         show:false,
         image:"",
+        ingredients:"",
         comment:[]
       },
       types:['Entré',
