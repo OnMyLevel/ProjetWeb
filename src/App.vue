@@ -113,13 +113,6 @@ export default {
       console.log(data)
       this.menus = menuArray;
     });
-     
-     bus.$on('currentUserConnect',(data)=>{
-      this.currentUser.mail = data.email;
-      this.currentUser.password= data.password;
-      console.log(this.currentUser);
-      localStorage.setItem(this.currentUser);
-   });
   }
 }
 </script>

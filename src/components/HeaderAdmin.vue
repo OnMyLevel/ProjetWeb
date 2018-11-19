@@ -3,7 +3,7 @@
 <ul>
   <li><router-link to="">Interface Admin</router-link></li>
   <router-link to="/" @click="quitter()"><li  style="float:right"><a v-on:click="changeShowModalSignIn" class="active" > Quitter </a></li></router-link>
-   <li style="float:right">{{this.user.mail}} </li>
+   <li style="float:right"></li>
 </ul>
  <app-banner> </app-banner>
 </header>

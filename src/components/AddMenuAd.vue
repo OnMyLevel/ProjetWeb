@@ -40,7 +40,7 @@
               <div class="modal-footer">
                 <slot name="footer">
                   <router-link to="/admin"><button class="modal-default-button" @click="$emit('close')"> Quitter </button></router-link>
-                  <router-link to="/admin"><button v-on:click.prevent="addMenu(),valideMenuFirebase(),$emit('close'); "  class="modal-default-button" type="submit"> Ajouter </button></router-link>
+                  <router-link to="/admin" @click="$emit('close')" ><button v-on:click.prevent="addMenu(),valideMenuFirebase(); " @click="$emit('close')" class="modal-default-button" type="submit"> Ajouter </button></router-link>
                 </slot>
               </div>
             </div>
