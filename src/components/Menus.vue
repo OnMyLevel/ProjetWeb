@@ -2,7 +2,7 @@
 <div id="menus">
    <h2>{{title}} </h2> 
   <ul>
-    <li v-for="menu in filteredMenus" v-bind:key="menu.id">
+    <li v-for="menu in  paginatedData" v-bind:key="menu.id">
         <h2 v-on:click="menu.show = !menu.show">{{menu.name}}</h2>
        <img v-if="menu.image" v-bind:src="menu.image" alt="menu.image">
            <p v-show="menu.show">
@@ -20,12 +20,25 @@
            <h4>{{menu.likes}} LIKES</h4>
      </li>
   </ul>
+  <button class="buttonForm" @click="prevPage">
+    Previous
+  </button>
+  <button class="buttonForm" @click="nextPage">
+    Next
+  </button>
 </div>
 </template>
 <script>
 import {menuRef} from '../main';
 import {userRef} from '../main';
 export default {
+  name: 'app',
+  data () {
+    return {
+       title:'Quelques Recettes',
+       pageNumber: 0  // default to page 0
+    }
+  },
     props:{
       menus:{
         type: Array,
@@ -35,23 +48,39 @@ export default {
      filteredMenus:{
         type: Array,
         required: true
-      }
-    },
-  name: 'app',
-  data () {
-    return {
-       title:'Quelques Recettes',
+      },
+      size:{
+      type:Number,
+      required:false,
+      default: 10
     }
   },
+    computed:{
+        pageCount(){
+        let l = this.filteredMenus.length,
+            s = this.size;
+        return Math.floor(l/s);
+
+      },
+      paginatedData(){
+         const start = this.pageNumber * this.size,
+          end = start + this.size;
+          return this.filteredMenus.slice(start, end);
+        }
+    },
   methods:{
       updateMenu:function(key,number){      
         menuRef.child(key).update({ likes:number});
         console.log(number);
         this.$forceUpdate();
-        this.$nextTick(() => {
-                        console.log('re-render end')
-                    })
+
     },
+    nextPage(){
+         this.pageNumber++;
+      },
+      prevPage(){
+        this.pageNumber--;
+      }
   }
 }
 </script>
