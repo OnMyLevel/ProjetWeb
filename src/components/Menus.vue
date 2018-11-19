@@ -29,8 +29,8 @@
 </div>
 </template>
 <script>
-import {menuRef} from '../main';
-import {userRef} from '../main';
+import {menuRef} from '../app';
+import {userRef} from '../app';
 export default {
   name: 'app',
   data () {

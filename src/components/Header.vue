@@ -11,7 +11,7 @@
 </template>
 <script>
 import Banner from './Banner.vue';
-import {bus}  from '../main';
+import {bus}  from '../app';
 
 export default {
   components:{

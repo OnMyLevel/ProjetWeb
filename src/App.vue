@@ -22,7 +22,7 @@ import AdminGui from './components/AdminGui.vue';
 import ModalSignUp from './components/ModalSignUp.vue';
 import ModalSignIn from './components/ModalSignIn.vue';
 import ModalAddMenu from './components/AddMenu.vue';
-import {bus} from './main';
+import {bus} from './app';
 import firebase from 'firebase';
 import session from 'vue-session';
 

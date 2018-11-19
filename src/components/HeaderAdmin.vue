@@ -10,7 +10,7 @@
 </template>
 <script>
 import Banner from './Banner.vue';
-import {bus,currentUser}  from '../main';
+import {bus,currentUser}  from '../app';
 
 export default {
   components:{

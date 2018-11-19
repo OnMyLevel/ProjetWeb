@@ -35,7 +35,7 @@
 
 <script>
 import '@fortawesome/fontawesome-free';
-import {bus} from '../main';
+import {bus} from '../app';
 export default {
   props:{
     currentUserfireBase:{
@@ -65,6 +65,7 @@ export default {
       valideUserFirebase:function(){
       console.log("FIREBASE CONECTE");
       console.log(this.user);
+        bus.$emit('currentUserfireBaseChange',this.user);
         bus.$emit('currentUserConnect',this.user);
       },
       updateShowModalSignIn:function(){

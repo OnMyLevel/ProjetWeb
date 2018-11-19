@@ -30,7 +30,7 @@ import AdminGui from './AdminGui.vue';
 import ModalSignUp from './ModalSignUp.vue';
 import ModalSignIn from './ModalSignIn.vue';
 import ModalAddMenu from './AddMenu.vue';
-import {bus} from '../main';
+import {bus} from '../app';
 import firebase from 'firebase/app'
 import 'firebase/app'
 import 'firebase/auth'
@@ -155,14 +155,12 @@ export default {
       this.currentUserFireBase = data;
       firebase.auth().signInWithEmailAndPassword(this.currentUserFireBase.email,this.currentUserFireBase.password).then(
         function(user) {
-          bus.$emit('currentUserConnect',data);
-          alert('Your are connect');
-          /*this.setUser(data);
-          console.log("ICI CICI")
-          console.log(this.user);*/
+          console.log("ICI");
+          bus.$on('currentUserConnect',data);
+          alert('Your are connect')
         },
         function(err){
-          alert("Oops "+ err.message)
+          alert("Oops "+ err.message);
         }
       );
     })
@@ -222,5 +220,30 @@ a{
 }
 a:hover {
     background-color: orange;
+}
+
+  * The alert message box */
+alert {
+    padding: 20px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+    color: black;
 }
 </style>
