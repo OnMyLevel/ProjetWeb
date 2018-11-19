@@ -8,7 +8,7 @@
 export default {
   data(){
     return {
-        titre:'AfricanFood Give your opinion and do it !'
+        titre:'A vos tabliers !'
     }
   }
 }
